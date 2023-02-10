@@ -1,9 +1,32 @@
 package org.example.codewar;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 
 class Solution {
+
+    public static String rot13(String message) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : message.toCharArray()) {
+            sb.append(rot13(c));
+        }
+        return sb.toString();
+    }
+
+    private static char rot13(char ch) {
+        if (ch >= 'A' && ch <= 'Z') {
+            return (char) (((ch - 'A') + 13) % 26 + 'A');
+        }
+        if (ch >= 'a' && ch <= 'z') {
+            return (char) (((ch - 'a') + 13) % 26 + 'a');
+        }
+        return ch;
+    }
+
+    public static int[] map(int[] arr) {
+        return Arrays.stream(arr).map(x -> x * 2).toArray();
+    }
 
     public static String whoLikesIt(String... names) {
 

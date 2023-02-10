@@ -4,6 +4,19 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Kata {
 
+    public static String abbrevName(String name) {
+        int idxWhitespace = name.trim().indexOf(' ');
+        return Character.toUpperCase(name.charAt(0)) + "." + Character.toUpperCase(name.charAt(idxWhitespace + 1));
+    }
+
+    public static int makeNegative(final int x) {
+        return x > 0 ? -x : x;
+    }
+
+    public static boolean solution(String str, String ending) {
+        return str.endsWith(ending);
+    }
+
     public static String longToIP(long ip) {
         long all_1 = 0xff;
 
