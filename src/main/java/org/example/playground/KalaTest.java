@@ -1,13 +1,23 @@
-package org.example.util;
+package org.example.playground;
 
+import kala.collection.immutable.ImmutableArray;
 import kala.collection.mutable.MutableArrayDeque;
 import kala.collection.mutable.MutableDeque;
 import kala.collection.mutable.MutableHashMap;
 import kala.collection.mutable.MutableMap;
+import kala.control.Either;
 
 public class KalaTest {
 
     public static void main(String[] args) {
+        Either<String, Integer> either = Either.left("error msg");
+        System.out.println(either.isLeft());
+        System.out.println(either.isRight());
+        System.out.println(either.toResult());
+
+        ImmutableArray<Integer> l = ImmutableArray.of(1, 2, 3, 4, 5);
+        System.out.println(l.stream().reduce(Integer::sum));
+
         MutableMap<String, Integer> lengthMap = new MutableHashMap<>();
         lengthMap.put("a", 1);
         lengthMap.put("b", 2);

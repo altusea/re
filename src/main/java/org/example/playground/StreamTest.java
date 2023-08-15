@@ -1,4 +1,6 @@
-package org.example.util;
+package org.example.playground;
+
+import org.example.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,7 @@ public class StreamTest {
         pairList.add(Pair.of("ccc", 3));
         // will throw Exception
         Map<String, Integer> map = pairList.stream()
-                .collect(Collectors.toMap(Pair::getComponent1, Pair::getComponent2));
+                .collect(Collectors.toMap(Pair::component1, Pair::component2));
         System.out.println(map);
     }
 }

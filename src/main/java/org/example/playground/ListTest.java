@@ -1,6 +1,4 @@
-package org.example.util;
-
-import com.google.common.collect.Lists;
+package org.example.playground;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +9,5 @@ public class ListTest {
         a.add(null);
         a.add(null);
         System.out.println(a.size());
-
-        System.out.println("=========================");
-
-        var intList = Lists.newArrayList(1, 2, 3);
-        intList.forEach(System.out::println);
     }
 }

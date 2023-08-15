@@ -4,12 +4,34 @@ import com.google.common.hash.Hashing;
 import org.apache.commons.lang3.StringUtils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class Kata {
 
+    public static int[] sortArray(int[] array) {
+        List<Integer> oddNums = new ArrayList<>();
+        for (int i : array) {
+            if (i % 2 != 0) {
+                oddNums.add(i);
+            }
+        }
+        oddNums.sort(Comparator.naturalOrder());
+        int n = array.length;
+        int index = 0;
+        int[] res = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (array[i] % 2 != 0) {
+                res[i] = oddNums.get(index++);
+            } else {
+                res[i] = array[i];
+            }
+        }
+        return res;
+    }
 
     public static int[] countBy(int x, int n) {
         return IntStream.rangeClosed(1, n).map(i -> i * x).toArray();
