@@ -7,10 +7,10 @@ public class Base36 {
         StringBuilder sb = new StringBuilder();
         while (decimalNumber != 0) {
             int remainder = decimalNumber % 36;
-            sb.insert(0, getCharacter(remainder));
+            sb.append(getCharacter(remainder));
             decimalNumber /= 36;
         }
-        return sb.toString();
+        return sb.reverse().toString();
     }
 
     public static char getCharacter(int value) {
@@ -25,5 +25,6 @@ public class Base36 {
         System.out.println(convertToBase36(0));
         System.out.println(convertToBase36(36));
         System.out.println(convertToBase36(37));
+        System.out.println(convertToBase36(72));
     }
 }

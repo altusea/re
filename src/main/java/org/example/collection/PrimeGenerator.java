@@ -5,12 +5,14 @@ import java.util.BitSet;
 import java.util.List;
 
 public class PrimeGenerator {
+
     private int limit_;
+    private final int increment_;
+
     private int index_ = 0;
-    private int increment_;
     private int count_ = 0;
-    private List<Integer> primes_ = new ArrayList<>();
-    private BitSet sieve_ = new BitSet();
+    private final List<Integer> primes_ = new ArrayList<>();
+    private final BitSet sieve_ = new BitSet();
     private int sieveLimit_ = 0;
 
     public PrimeGenerator(int initialLimit, int increment) {
