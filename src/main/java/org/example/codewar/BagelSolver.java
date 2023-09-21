@@ -5,6 +5,12 @@ import java.lang.reflect.Modifier;
 
 public class BagelSolver {
 
+    public static class Bagel {
+        public final int getValue() {
+            return 3;
+        }
+    }
+
     public static Bagel getBagel() {
         try {
             Field field = Boolean.class.getField("TRUE");

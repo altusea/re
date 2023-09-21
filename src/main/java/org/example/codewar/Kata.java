@@ -4,13 +4,26 @@ import com.google.common.hash.Hashing;
 import org.apache.commons.lang3.StringUtils;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class Kata {
+
+    public static List<Integer> treeByLevels(Node node) {
+        if (node == null) {
+            return Collections.emptyList();
+        }
+        Deque<Node> queue = new ArrayDeque<>();
+        queue.add(node);
+        List<Integer> res = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            Node cur = queue.pollFirst();
+            res.add(cur.value);
+            if (cur.left != null) queue.addLast(cur.left);
+            if (cur.right != null) queue.addLast(cur.right);
+        }
+        return res;
+    }
 
     public static int[] sortArray(int[] array) {
         List<Integer> oddNums = new ArrayList<>();
@@ -90,20 +103,12 @@ public class Kata {
         return Hashing.sha256().hashString(s, StandardCharsets.UTF_8).toString();
     }
 
-    public static int squareSum(int[] n) {
-        return Arrays.stream(n).map(i -> i * i).sum();
-    }
-
     public static int findOdd(int[] arr) {
         int res = 0;
         for (int i : arr) {
             res = res ^ i;
         }
         return res;
-    }
-
-    public static List<Object> filterList(final List<Object> list) {
-        return list.stream().filter(e -> !(e instanceof String)).toList();
     }
 
     public static double[] tribonacci(double[] s, int n) {

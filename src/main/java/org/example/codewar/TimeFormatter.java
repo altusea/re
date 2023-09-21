@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class TimeFormatter {
 
-    record Pair(String single, String duplicate) {
+    public record Pair(String single, String duplicate) {
     }
 
     public static Map<Integer, Pair> UNIT_MAP = new HashMap<>() {

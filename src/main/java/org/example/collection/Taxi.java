@@ -32,7 +32,7 @@ class SumIterator implements Iterator<CubeSum> {
     }
 
     public CubeSum next() {
-        while (pq.size() == 0 || pq.peek().value >= n * n * n)
+        while (pq.isEmpty() || pq.peek().value >= n * n * n)
             pq.add(new CubeSum(++n, 1));
 
         CubeSum s = pq.remove();

@@ -20,18 +20,9 @@ public class HQ9p {
 
         for (char instr : code.toString().toCharArray()) {
             switch (instr) {
-                case 'q':
-                    System.out.println(code);
-                    break;
-                case 'h':
-                    System.out.println("Hello, World!");
-                    break;
-                case '9':
-                    printBottles();
-                    break;
-                case '+':
-                    break;
-                default: //ignore other chars
+                case 'q' -> System.out.println(code);
+                case 'h' -> System.out.println("Hello, World!");
+                case '9' -> printBottles();
             }
         }
     }

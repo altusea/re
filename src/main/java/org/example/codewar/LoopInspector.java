@@ -2,7 +2,7 @@ package org.example.codewar;
 
 public class LoopInspector {
 
-    interface Node {
+    public interface Node {
         Node getNext();
     }
 
