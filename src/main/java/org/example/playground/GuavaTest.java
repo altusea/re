@@ -1,6 +1,7 @@
 package org.example.playground;
 
 import com.google.common.collect.*;
+import org.example.util.Pair;
 
 import java.util.List;
 import java.util.Map;
@@ -26,14 +27,14 @@ public class GuavaTest {
         pairList.add(new Pair<>("one", 3));
         pairList.add(new Pair<>("three", 5));
 
-        List<String> immutableStrList = pairList.stream().map(Pair::left).collect(ImmutableList.toImmutableList());
+        List<String> immutableStrList = pairList.stream().map(Pair::component1).collect(ImmutableList.toImmutableList());
         try {
             immutableStrList.add("seven");
         } catch (UnsupportedOperationException e) {
             System.out.println("unsupported operation [list.add()] ...");
         }
 
-        Map<String, Integer> immutableMap = pairList.stream().collect(ImmutableMap.toImmutableMap(Pair::left, Pair::right));
+        Map<String, Integer> immutableMap = pairList.stream().collect(ImmutableMap.toImmutableMap(Pair::component1, Pair::component2));
         try {
             immutableMap.put("ten", 3);
         } catch (UnsupportedOperationException e) {
@@ -44,7 +45,7 @@ public class GuavaTest {
         pairList.add(new Pair<>("one", 1));
         pairList.add(new Pair<>("ten", 10));
         for (Pair<String, Integer> pair : pairList) {
-            multimap.put(pair.left(), pair.right());
+            multimap.put(pair.component1(), pair.component2());
         }
         System.out.println(multimap);
     }

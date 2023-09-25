@@ -1,5 +1,7 @@
 package org.example.playground;
 
+import org.example.util.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +18,7 @@ public class ListTest {
         pairList.add(new Pair<>("three", 5));
         pairList.add(new Pair<>("one", 1));
         pairList.add(new Pair<>("ten", 10));
-        System.out.println(pairList.stream().map(Pair::right).toList());
-        System.out.println(pairList.stream().map(Pair::left).collect(Collectors.toUnmodifiableSet()));
+        System.out.println(pairList.stream().map(Pair::component1).toList());
+        System.out.println(pairList.stream().map(Pair::component2).collect(Collectors.toUnmodifiableSet()));
     }
 }

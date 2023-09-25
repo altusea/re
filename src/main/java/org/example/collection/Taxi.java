@@ -76,7 +76,7 @@ public class Taxi {
             List<CubeSum> t = taxi.next();
             if (i > 25 && i < 2000) continue;
 
-            System.out.printf("%4d: %10d", i, t.get(0).value);
+            System.out.printf("%4d: %10d", i, t.getFirst().value);
             for (CubeSum s : t)
                 System.out.print(" = " + s);
             System.out.println();
