@@ -1,6 +1,7 @@
 package org.example.playground;
 
 import com.google.common.collect.*;
+import com.google.common.primitives.Ints;
 import org.example.util.Pair;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public class GuavaTest {
     public static void main(String[] args) {
         var intList = Lists.newArrayList(1, 2, 3);
         intList.forEach(System.out::println);
+
+        int[] intArr = Ints.toArray(intList);
+        System.out.println("int[] intArr: length is " + intArr.length);
 
         var strList = Lists.newArrayList("a", "b", "c");
 
