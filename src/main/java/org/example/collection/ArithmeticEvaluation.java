@@ -1,5 +1,7 @@
 package org.example.collection;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Stack;
 
 public class ArithmeticEvaluation {
@@ -86,7 +88,7 @@ public class ArithmeticEvaluation {
         operands.push(new BinaryExpression(leftOperand, operator, rightOperand));
     }
 
-    public static Expression parse(String input) {
+    public static Expression parse(@NotNull String input) {
         int curIndex = 0;
         boolean afterOperand = false;
         Stack<Expression> operands = new Stack<>();

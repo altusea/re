@@ -1,9 +1,7 @@
 package org.example.codewar;
 
-import com.google.common.hash.Hashing;
 import org.apache.commons.lang3.StringUtils;
 
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -97,10 +95,6 @@ public class Kata {
     public static String oddOrEven(int[] array) {
         if (array == null || array.length == 0) array = new int[]{0};
         return Arrays.stream(array).sum() % 2 == 0 ? "even" : "odd";
-    }
-
-    public static String sha256(String s) {
-        return Hashing.sha256().hashString(s, StandardCharsets.UTF_8).toString();
     }
 
     public static int findOdd(int[] arr) {
