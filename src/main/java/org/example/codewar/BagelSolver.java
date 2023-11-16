@@ -22,7 +22,7 @@ public class BagelSolver {
 
             field.set(null, false);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return new Bagel();
     }

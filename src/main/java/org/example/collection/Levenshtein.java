@@ -1,5 +1,8 @@
 package org.example.collection;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
 import static java.lang.Math.abs;
@@ -53,7 +56,8 @@ public class Levenshtein {
         return cost[lb];
     }
 
-    private static int min(int... a) {
+    @Contract(pure = true)
+    private static int min(int @NotNull ... a) {
         int min = Integer.MAX_VALUE;
         for (int i : a) if (i < min) min = i;
         return min;
