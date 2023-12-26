@@ -9,6 +9,31 @@ import java.util.stream.IntStream;
 
 public class Solution {
 
+    public static int solveSuperMarketQueue(int[] customers, int n) {
+        int[] result = new int[n];
+        for (int customer : customers) {
+            result[0] += customer;
+            Arrays.sort(result);
+        }
+        return result[n - 1];
+    }
+
+    public static String camelCase(String input) {
+        List<String> res = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                res.add(sb.toString());
+                sb = new StringBuilder();
+                sb.append(c);
+            } else {
+                sb.append(c);
+            }
+        }
+        res.add(sb.toString());
+        return String.join(" ", res);
+    }
+
     public static int[] sumParts(int[] ls) {
         int n = ls.length;
         int[] res = new int[n + 1];

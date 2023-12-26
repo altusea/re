@@ -7,6 +7,23 @@ import java.util.stream.IntStream;
 
 public class Kata {
 
+    public static int ConvertBinaryArrayToInt(List<Integer> binary) {
+        int number = 0;
+        for (int bit : binary)
+            number = number << 1 | bit;
+        return number;
+    }
+
+    public static int[] digitize(long n) {
+        if (n == 0) return new int[]{0};
+        List<Integer> res = new ArrayList<>();
+        while (n != 0) {
+            res.add((int) (n % 10));
+            n /= 10;
+        }
+        return res.stream().mapToInt(i -> i).toArray();
+    }
+
     public static List<Integer> treeByLevels(Node node) {
         if (node == null) {
             return Collections.emptyList();

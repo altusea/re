@@ -1,6 +1,6 @@
 package org.example.playground;
 
-import org.example.util.Pair;
+import kala.tuple.Tuple2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +13,12 @@ public class ListTest {
         a.add(null);
         System.out.println(a.size());
 
-        List<Pair<String, Integer>> pairList = new ArrayList<>();
-        pairList.add(new Pair<>("one", 3));
-        pairList.add(new Pair<>("three", 5));
-        pairList.add(new Pair<>("one", 1));
-        pairList.add(new Pair<>("ten", 10));
-        System.out.println(pairList.stream().map(Pair::component1).toList());
-        System.out.println(pairList.stream().map(Pair::component2).collect(Collectors.toUnmodifiableSet()));
+        List<Tuple2<String, Integer>> pairList = new ArrayList<>();
+        pairList.add(new Tuple2<>("one", 3));
+        pairList.add(new Tuple2<>("three", 5));
+        pairList.add(new Tuple2<>("one", 1));
+        pairList.add(new Tuple2<>("ten", 10));
+        System.out.println(pairList.stream().map(Tuple2::component1).toList());
+        System.out.println(pairList.stream().map(Tuple2::component2).collect(Collectors.toUnmodifiableSet()));
     }
 }
