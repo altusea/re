@@ -1,37 +1,47 @@
 package org.example.playground;
 
-import com.machinezoo.noexception.throwing.ThrowingRunnable;
+import dev.failsafe.Failsafe;
+import dev.failsafe.RetryPolicy;
+import dev.failsafe.RetryPolicyBuilder;
+import dev.failsafe.function.CheckedPredicate;
+import dev.failsafe.function.CheckedRunnable;
+import dev.failsafe.function.CheckedSupplier;
+import org.apache.commons.lang3.NotImplementedException;
 
-import java.util.concurrent.Callable;
+import java.net.SocketTimeoutException;
+import java.time.LocalDateTime;
 
 public class RetryUtil {
 
-    public static <R> R withTry(Callable<R> callable, final int maxTryTimes) {
-        int i = 0;
-        final int canTryTimes = Math.max(maxTryTimes, 1);
-        while (i < canTryTimes) {
-            try {
-                i++;
-                return callable.call();
-            } catch (Throwable e) {
-                // do nothing
-            }
+    public static <R> R withTry(final CheckedSupplier<R> procedure,
+                                final int maxAttempts,
+                                final CheckedPredicate<? extends Throwable> failurePredicate) {
+
+        RetryPolicyBuilder<R> retryPolicyBuilder = RetryPolicy.<R>builder()
+                .withMaxAttempts(maxAttempts);
+        if (failurePredicate != null) {
+            retryPolicyBuilder.handleIf(failurePredicate);
         }
-        throw new RuntimeException("failed after " + canTryTimes + "tries");
+        RetryPolicy<R> retryPolicy = retryPolicyBuilder.build();
+        return Failsafe.with(retryPolicy).get(procedure);
     }
 
-    public static void withTry(ThrowingRunnable runnable, final int maxTryTimes) {
-        int i = 0;
-        final int canTryTimes = Math.max(maxTryTimes, 1);
-        while (i < canTryTimes) {
-            try {
-                i++;
-                runnable.run();
-                return;
-            } catch (Throwable e) {
-                // do nothing
-            }
+    public static void withTry(final CheckedRunnable procedure,
+                               final int maxAttempts,
+                               final CheckedPredicate<? extends Throwable> failurePredicate) {
+        RetryPolicyBuilder<Void> retryPolicyBuilder = RetryPolicy.<Void>builder()
+                .withMaxAttempts(maxAttempts);
+        if (failurePredicate != null) {
+            retryPolicyBuilder.handleIf(failurePredicate);
         }
-        throw new RuntimeException("failed after " + canTryTimes + "tries");
+        RetryPolicy<Void> retryPolicy = retryPolicyBuilder.build();
+        Failsafe.with(retryPolicy).run(procedure);
+    }
+
+    public static void main(String[] args) {
+        withTry((CheckedRunnable) () -> {
+            System.out.println("exec time: " + LocalDateTime.now());
+            throw new NotImplementedException("todo");
+        }, 3, e -> e instanceof SocketTimeoutException);
     }
 }

@@ -1,39 +1,38 @@
 package org.example.playground;
 
-import com.machinezoo.noexception.throwing.ThrowingRunnable;
+import dev.failsafe.function.CheckedRunnable;
+import dev.failsafe.function.CheckedSupplier;
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.concurrent.Callable;
 
 public class RetryUtilTest {
 
     @Test
     void testRunnable() {
-        ThrowingRunnable runnable = () -> System.out.println("something");
-        Assertions.assertDoesNotThrow(() -> RetryUtil.withTry(runnable, 3));
+        CheckedRunnable runnable = () -> System.out.println("something");
+        Assertions.assertDoesNotThrow(() -> RetryUtil.withTry(runnable, 3, null));
     }
 
     @Test
     void testCallable() {
-        Callable<Integer> callable = () -> 100;
-        Assertions.assertEquals(RetryUtil.withTry(callable, 3), 100);
+        CheckedSupplier<Integer> callable = () -> 100;
+        Assertions.assertEquals(RetryUtil.withTry(callable, 3, null), 100);
     }
 
     @Test
     void testThrowingRunnable() {
-        ThrowingRunnable runnable = () -> {
+        CheckedRunnable runnable = () -> {
             throw new NotImplementedException();
         };
-        Assertions.assertThrows(RuntimeException.class, () -> RetryUtil.withTry(runnable, 3));
+        Assertions.assertThrows(RuntimeException.class, () -> RetryUtil.withTry(runnable, 3, null));
     }
 
     @Test
     void testThrowingCallable() {
-        Callable<Integer> callable = () -> {
+        CheckedSupplier<Integer> callable = () -> {
             throw new NotImplementedException();
         };
-        Assertions.assertThrows(RuntimeException.class, () -> RetryUtil.withTry(callable, 3));
+        Assertions.assertThrows(RuntimeException.class, () -> RetryUtil.withTry(callable, 3, null));
     }
 }
