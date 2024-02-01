@@ -4,6 +4,7 @@ import kala.collection.immutable.ImmutableArray;
 import kala.collection.immutable.ImmutableMap;
 import kala.collection.mutable.*;
 import kala.control.Either;
+import kala.control.Result;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -47,5 +48,11 @@ public class KalaTest {
         mutableList.append(5);
         mutableList.append(6);
         System.out.println(mutableList.stream().map(String::valueOf).collect(Collectors.joining(", ")));
+
+        System.out.println("\n=====> Result");
+        Result<Integer, ?> result1 = Result.ok(100);
+        System.out.println(result1);
+        Result<?, String> result2 = Result.err("500");
+        System.out.println(result2);
     }
 }

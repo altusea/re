@@ -7,6 +7,11 @@ import java.util.stream.IntStream;
 
 public class Kata {
 
+    public static String binaryAddition(int a, int b) {
+        int sum = a + b;
+        return Integer.toBinaryString(sum);
+    }
+
     public static int ConvertBinaryArrayToInt(List<Integer> binary) {
         int number = 0;
         for (int bit : binary)

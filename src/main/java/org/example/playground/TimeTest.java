@@ -34,5 +34,10 @@ public class TimeTest {
         System.out.println("\n==================== other test ====================");
         LocalDateTime fromDate = LocalDateTimeUtil.of(new Date());
         System.out.println(fromDate);
+
+        System.out.println("\n==================== YearMonth test ====================");
+        YearMonth yearMonth = YearMonth.now();
+        System.out.println(yearMonth);
+        System.out.println(yearMonth.atEndOfMonth());
     }
 }

@@ -1,4 +1,4 @@
-package org.example.playground;
+package org.example.util;
 
 import dev.failsafe.Failsafe;
 import dev.failsafe.RetryPolicy;

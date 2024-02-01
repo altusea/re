@@ -1,5 +1,8 @@
 package org.example.util;
 
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.LocalDateTimeUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
@@ -11,6 +14,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class GsonUtil {
 
@@ -18,13 +22,33 @@ public class GsonUtil {
 
     static {
         GsonBuilder builder = new GsonBuilder()
+                .registerTypeAdapter(Date.class, new TypeAdapter<Date>() {
+                    @Override
+                    public void write(JsonWriter jsonWriter, Date date) throws IOException {
+                        if (date == null) {
+                            jsonWriter.nullValue();
+                        } else {
+                            jsonWriter.value(DateUtil.format(date, DatePattern.NORM_DATETIME_FORMAT));
+                        }
+                    }
+
+                    @Override
+                    public Date read(JsonReader jsonReader) throws IOException {
+                        if (jsonReader.peek() == JsonToken.NULL) {
+                            jsonReader.nextNull();
+                            return null;
+                        } else {
+                            return DateUtil.parse(jsonReader.nextString(), DatePattern.NORM_DATETIME_FORMAT);
+                        }
+                    }
+                })
                 .registerTypeAdapter(LocalDate.class, new TypeAdapter<LocalDate>() {
                     @Override
                     public void write(final JsonWriter jsonWriter, final LocalDate localDate) throws IOException {
                         if (localDate == null) {
                             jsonWriter.nullValue();
                         } else {
-                            jsonWriter.value(localDate.toString());
+                            jsonWriter.value(LocalDateTimeUtil.formatNormal(localDate));
                         }
                     }
 
@@ -34,7 +58,7 @@ public class GsonUtil {
                             jsonReader.nextNull();
                             return null;
                         } else {
-                            return LocalDate.parse(jsonReader.nextString());
+                            return LocalDateTimeUtil.parseDate(jsonReader.nextString(), DatePattern.NORM_DATE_FORMATTER);
                         }
                     }
                 })
@@ -44,7 +68,7 @@ public class GsonUtil {
                         if (localDateTime == null) {
                             jsonWriter.nullValue();
                         } else {
-                            jsonWriter.value(localDateTime.toString());
+                            jsonWriter.value(LocalDateTimeUtil.format(localDateTime, DatePattern.NORM_DATETIME_FORMATTER));
                         }
                     }
 
@@ -54,7 +78,7 @@ public class GsonUtil {
                             jsonReader.nextNull();
                             return null;
                         } else {
-                            return LocalDateTime.parse(jsonReader.nextString());
+                            return LocalDateTimeUtil.parse(jsonReader.nextString(), DatePattern.NORM_DATETIME_FORMATTER);
                         }
                     }
                 });
@@ -69,48 +93,8 @@ public class GsonUtil {
         return gson.fromJson(jsonStr, typeOfT);
     }
 
-    public static String fromObject(Object obj) {
+    public static String toJson(Object obj) {
         return gson.toJson(obj);
     }
 
-    static class TestClazz {
-        private LocalDate localDate;
-
-        private LocalDateTime localDateTime;
-
-        public LocalDate getLocalDate() {
-            return localDate;
-        }
-
-        public void setLocalDate(LocalDate localDate) {
-            this.localDate = localDate;
-        }
-
-        public LocalDateTime getLocalDateTime() {
-            return localDateTime;
-        }
-
-        public void setLocalDateTime(LocalDateTime localDateTime) {
-            this.localDateTime = localDateTime;
-        }
-
-        @Override
-        public String toString() {
-            return "TestClazz{" +
-                    "localDate=" + localDate +
-                    ", localDateTime=" + localDateTime +
-                    '}';
-        }
-    }
-
-    public static void main(String[] args) {
-        TestClazz clazz = new TestClazz();
-        clazz.setLocalDate(LocalDate.now());
-        clazz.setLocalDateTime(LocalDateTime.now());
-
-        String jsonStr = fromObject(clazz);
-        System.out.println(jsonStr);
-        TestClazz fromJson = fromJson(jsonStr, TestClazz.class);
-        System.out.println(fromJson);
-    }
 }

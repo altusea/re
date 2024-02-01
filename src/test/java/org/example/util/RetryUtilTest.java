@@ -1,4 +1,4 @@
-package org.example.playground;
+package org.example.util;
 
 import dev.failsafe.function.CheckedRunnable;
 import dev.failsafe.function.CheckedSupplier;
