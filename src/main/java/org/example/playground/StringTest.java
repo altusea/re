@@ -16,5 +16,8 @@ public class StringTest {
         } else {
             System.out.println("not matched!");
         }
+
+        final String MSG = "{\"encrypt\":\"%1$s\",\"msgsignature\":\"%2$s\",\"timestamp\":\"%3$s\",\"nonce\":\"%4$s\"}";
+        System.out.printf((MSG) + "%n", 1, 2, "xx3", 4);
     }
 }
