@@ -2,7 +2,6 @@ package org.example.util;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.LocalDateTimeUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
@@ -14,6 +13,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.Date;
 
 public class GsonUtil {
@@ -28,7 +28,7 @@ public class GsonUtil {
                         if (date == null) {
                             jsonWriter.nullValue();
                         } else {
-                            jsonWriter.value(DateUtil.format(date, DatePattern.NORM_DATETIME_FORMAT));
+                            jsonWriter.value(DateUtil.format(date, DatePattern.NORM_DATETIME_FORMATTER));
                         }
                     }
 
@@ -38,7 +38,7 @@ public class GsonUtil {
                             jsonReader.nextNull();
                             return null;
                         } else {
-                            return DateUtil.parse(jsonReader.nextString(), DatePattern.NORM_DATETIME_FORMAT);
+                            return DateUtil.parse(jsonReader.nextString(), DatePattern.NORM_DATETIME_FORMATTER);
                         }
                     }
                 })
@@ -48,7 +48,7 @@ public class GsonUtil {
                         if (localDate == null) {
                             jsonWriter.nullValue();
                         } else {
-                            jsonWriter.value(LocalDateTimeUtil.formatNormal(localDate));
+                            jsonWriter.value(localDate.format(DatePattern.NORM_DATE_FORMATTER));
                         }
                     }
 
@@ -58,7 +58,7 @@ public class GsonUtil {
                             jsonReader.nextNull();
                             return null;
                         } else {
-                            return LocalDateTimeUtil.parseDate(jsonReader.nextString(), DatePattern.NORM_DATE_FORMATTER);
+                            return LocalDate.parse(jsonReader.nextString(), DatePattern.NORM_DATE_FORMATTER);
                         }
                     }
                 })
@@ -68,7 +68,7 @@ public class GsonUtil {
                         if (localDateTime == null) {
                             jsonWriter.nullValue();
                         } else {
-                            jsonWriter.value(LocalDateTimeUtil.format(localDateTime, DatePattern.NORM_DATETIME_FORMATTER));
+                            jsonWriter.value(localDateTime.format(DatePattern.NORM_DATETIME_FORMATTER));
                         }
                     }
 
@@ -78,7 +78,27 @@ public class GsonUtil {
                             jsonReader.nextNull();
                             return null;
                         } else {
-                            return LocalDateTimeUtil.parse(jsonReader.nextString(), DatePattern.NORM_DATETIME_FORMATTER);
+                            return LocalDateTime.parse(jsonReader.nextString(), DatePattern.NORM_DATETIME_FORMATTER);
+                        }
+                    }
+                })
+                .registerTypeAdapter(YearMonth.class, new TypeAdapter<YearMonth>() {
+                    @Override
+                    public void write(JsonWriter jsonWriter, YearMonth yearMonth) throws IOException {
+                        if (yearMonth == null) {
+                            jsonWriter.nullValue();
+                        } else {
+                            jsonWriter.value(yearMonth.format(DatePattern.NORM_MONTH_FORMATTER));
+                        }
+                    }
+
+                    @Override
+                    public YearMonth read(JsonReader jsonReader) throws IOException {
+                        if (jsonReader.peek() == JsonToken.NULL) {
+                            jsonReader.nextNull();
+                            return null;
+                        } else {
+                            return YearMonth.parse(jsonReader.nextString(), DatePattern.NORM_MONTH_FORMATTER);
                         }
                     }
                 });

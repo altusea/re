@@ -4,11 +4,13 @@ import org.example.util.GsonUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 
 public class GsonTest {
 
     public static void main(String[] args) {
         TimeHolder clazz = new TimeHolder();
+        clazz.setYearMonth(YearMonth.now());
         clazz.setLocalDate(LocalDate.now());
         clazz.setLocalDateTime(LocalDateTime.now());
 
