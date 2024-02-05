@@ -81,6 +81,9 @@ public class OkHttpUtil {
 
         try (Response response = failsafeCall.execute()) {
             var responseBody = response.body();
+            if (responseBody == null) {
+                return null;
+            }
             return GsonUtil.fromJson(responseBody.string(), responseType);
         } catch (IOException e) {
             throw new RuntimeException("IOException occurred ...");
