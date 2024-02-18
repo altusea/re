@@ -10,8 +10,7 @@ public class LongAccumulatorTest {
     public static void main(String[] args) {
         LongAccumulator balance = new LongAccumulator(Long::sum, 10000L);
         Runnable w = () -> balance.accumulate(1000L);
-        try (
-                ExecutorService executor = Executors.newFixedThreadPool(50)) {
+        try (ExecutorService executor = Executors.newFixedThreadPool(50)) {
             for (int i = 0; i < 50; i++) {
                 executor.submit(w);
             }

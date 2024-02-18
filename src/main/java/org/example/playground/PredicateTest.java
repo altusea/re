@@ -8,7 +8,7 @@ public class PredicateTest {
 
     public static void main(String[] args) {
 
-        List<String> a = List.of("Aaaaa", "Adddddd", "Ccc", "Aa", "Ddddddd");
+        List<String> a = List.of("Aah", "Adder", "Ccc", "Aa", "Dylan");
 
         List<Predicate<String>> allPredicates = new ArrayList<>();
         allPredicates.add(str -> str.startsWith("A"));
