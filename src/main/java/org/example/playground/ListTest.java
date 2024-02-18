@@ -1,10 +1,10 @@
 package org.example.playground;
 
+import com.google.common.collect.ImmutableSet;
 import kala.tuple.Tuple2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ListTest {
     public static void main(String[] args) {
@@ -19,6 +19,6 @@ public class ListTest {
         pairList.add(new Tuple2<>("one", 1));
         pairList.add(new Tuple2<>("ten", 10));
         System.out.println(pairList.stream().map(Tuple2::component1).toList());
-        System.out.println(pairList.stream().map(Tuple2::component2).collect(Collectors.toUnmodifiableSet()));
+        System.out.println(pairList.stream().map(Tuple2::component2).collect(ImmutableSet.toImmutableSet()));
     }
 }
