@@ -1,5 +1,7 @@
 package org.example.codewar;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -8,6 +10,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Solution {
+
+    public static boolean check(Object[] a, Object x) {
+        return ArrayUtils.indexOf(a, x) != ArrayUtils.INDEX_NOT_FOUND;
+    }
 
     public static int solveSuperMarketQueue(int[] customers, int n) {
         int[] result = new int[n];
