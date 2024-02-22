@@ -24,7 +24,13 @@ public class CustomLocalDateTimeDeserializer extends LocalDateTimeDeserializer {
         if (parser.hasToken(JsonToken.VALUE_NUMBER_INT)) {
             long timestamp = parser.getLongValue();
             // Handle timestamp conversion to LocalDateTime
-            return LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
+            if (String.valueOf(timestamp).length() == 13) {
+                // 毫秒
+                return LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
+            } else if (String.valueOf(timestamp).length() == 10) {
+                // 秒
+                return LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), ZoneId.systemDefault());
+            }
         } else if (parser.hasToken(JsonToken.VALUE_STRING)) {
             String text = parser.getText();
             if (StringUtils.isEmpty(text)) {

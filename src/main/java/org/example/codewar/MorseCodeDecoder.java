@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
 
 public class MorseCodeDecoder {
 
+    /**
+     * mock
+     */
     private static final Map<String, String> MorseCode = new HashMap<>();
 
     public static String decode(String morseCode) {

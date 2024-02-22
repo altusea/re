@@ -1,11 +1,13 @@
 package org.example.codewar;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiFunction;
 
 public class Machine {
 
-    // https://www.codewars.com/kata/54c1bf903f0696f04600068b/train/java
     public interface CPU {
+
         /**
          * Returns the value of the named register.
          */
@@ -28,98 +30,121 @@ public class Machine {
     }
 
     private final CPU cpu;
+    private static final Map<String, BiFunction<Integer, Integer, Integer>> OP_FUNCS = new HashMap<>();
 
-    private static final List<String> registers = List.of("a", "b", "c", "d");
-    private static final List<String> revRegisters = List.of("d", "c", "b", "a");
+    static {
+        OP_FUNCS.put("add", Integer::sum);
+        OP_FUNCS.put("sub", (a, b) -> a - b);
+        OP_FUNCS.put("mul", (a, b) -> a * b);
+        OP_FUNCS.put("div", (a, b) -> a / b);
+        OP_FUNCS.put("and", (a, b) -> a & b);
+        OP_FUNCS.put("or", (a, b) -> a | b);
+        OP_FUNCS.put("xor", (a, b) -> a ^ b);
+    }
 
     public Machine(CPU cpu) {
         this.cpu = cpu;
     }
 
     public void exec(String instr) {
-
-        String[] parts = instr.split(" ");
-
-        switch (parts[0]) {
-            case "push" -> {
-                // Pushes a register [reg] or an immediate value [int] to the stack.
-                String operand = parts[1];
-                if (registers.contains(operand)) {
-                    cpu.writeStack(cpu.readReg(operand));
+        String[] split = instr.split("[ ,]+");
+        switch (split[0]) {
+            case "pop":
+                if (split.length == 1) {
+                    pop("");
                 } else {
-                    cpu.writeStack(Integer.parseInt(operand));
+                    pop(split[1]);
                 }
-            }
-            case "pop" -> {
-                if (parts.length == 1) {
-                    // Pops a value of the stack, discarding the value.
-                    cpu.popStack();
+                break;
+            case "push":
+                push(split[1]);
+                break;
+            case "popr":
+                popr();
+                break;
+            case "poprr":
+                poprr();
+                break;
+            case "pushr":
+                pushr();
+                break;
+            case "pushrr":
+                pushrr();
+                break;
+            case "mov":
+                if (split.length == 2) {
+                    mov(split[1], "a");
                 } else {
-                    int v = cpu.popStack();
-                    cpu.writeReg(parts[1], v);
+                    mov(split[1], split[2]);
                 }
-            }
-            case "pushr" -> {
-                // Pushes the general registers onto the stack, in order. (a, b, c, d)
-                for (String reg : registers) {
-                    cpu.writeStack(cpu.readReg(reg));
-                }
-            }
-            case "pushrr" -> {
-                // Pushes the general registers onto the stack, in reverse order. (d, c, b, a)
-                for (String reg : revRegisters) {
-                    cpu.writeStack(cpu.readReg(reg));
-                }
-            }
-            case "popr" -> {
-                // Pops values off the stack, and loads them into the general registers,
-                // in order so that the two executions `pushr()`  and `popr()` would leave the registers unchanged.
-                for (String reg : revRegisters) {
-                    cpu.writeReg(reg, cpu.popStack());
-                }
-            }
-            case "poprr" -> {
-                // Pops values off the stack, and loads them into the general registers,
-                // in order so that the two executions `pushr()`  and `poprr()` would invert the values of the registers from left to right.
-                for (String reg : registers) {
-                    cpu.writeReg(reg, cpu.popStack());
-                }
-            }
-            case "mov" -> {
-                int v;
-                if (registers.contains(parts[1])) {
-                    v = cpu.readReg(parts[1]);
+                break;
+            default:
+                if (split.length == 2) {
+                    operation(split[0], split[1], "a");
                 } else {
-                    v = Integer.parseInt(parts[1]);
+                    operation(split[0], split[1], split[2]);
                 }
-                cpu.writeReg(parts[2], v);
-            }
-            case "add" -> {
-                int times;
-                if (registers.contains(parts[1])) {
-                    times = cpu.readReg(parts[1]);
-                } else {
-                    times = Integer.parseInt(parts[1]);
-                }
-                int sum = 0;
-                for (int i = 0; i < times; i++) {
-                    sum += cpu.popStack();
-                }
-                cpu.writeReg("a", sum);
-            }
-            case "mul" -> {
-                int times;
-                if (registers.contains(parts[1])) {
-                    times = cpu.readReg(parts[1]);
-                } else {
-                    times = Integer.parseInt(parts[1]);
-                }
-                int product = 1;
-                for (int i = 0; i < times; i++) {
-                    product *= cpu.popStack();
-                }
-                cpu.writeReg("a", product);
-            }
+                break;
         }
+    }
+
+    private void popr() {
+        for (String reg : new String[]{"d", "c", "b", "a"}) {
+            pop(reg);
+        }
+    }
+
+    private void poprr() {
+        for (String reg : new String[]{"a", "b", "c", "d"}) {
+            pop(reg);
+        }
+    }
+
+    private void pop(String reg) {
+        if (reg.isEmpty()) {
+            // Discard
+            cpu.popStack();
+        } else {
+            // Pop to a register
+            cpu.writeReg(reg, cpu.popStack());
+        }
+    }
+
+    private void pushr() {
+        for (String reg : new String[]{"a", "b", "c", "d"}) {
+            push(reg);
+        }
+    }
+
+    private void pushrr() {
+        for (String reg : new String[]{"d", "c", "b", "a"}) {
+            push(reg);
+        }
+    }
+
+    private void push(String regint) {
+        if ("abcd".contains(regint)) {
+            cpu.writeStack(cpu.readReg(regint));
+        } else {
+            cpu.writeStack(Integer.parseInt(regint));
+        }
+    }
+
+    private void mov(String n, String reg) {
+        cpu.writeReg(reg, Integer.parseInt(n));
+    }
+
+    private void operation(String opType, String regint, String reg) {
+
+        int nToPop = "abcd".contains(regint) ? cpu.readReg(regint) : Integer.parseInt(regint);
+
+        if (opType.charAt(opType.length() - 1) == 'a') {
+            opType = opType.substring(0, opType.length() - 1);
+            push("a");
+        }
+        int res = cpu.popStack();
+        for (int x = 0; x < nToPop - 1; x++)
+            res = OP_FUNCS.get(opType).apply(res, cpu.popStack());
+        cpu.writeReg(reg, res);
     }
 }

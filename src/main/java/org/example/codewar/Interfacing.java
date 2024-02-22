@@ -1,75 +1,77 @@
 package org.example.codewar;
 
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
-
-import static kala.Conditions.assertEquals;
 
 /**
- * <a href="https://www.codewars.com/kata/54c183dd3f069611c3000f97/train/java">source</a>
+ * <a href="https://www.codewars.com/kata/54c183dd3f069611c3000f97/train/java">done</a>
  */
 public class Interfacing {
-
-    public interface Date {
-
-        Integer getYear();
-
-        void setYear(Integer i);
-
-        Integer getMonth();
-
-        void setMonth(Integer i);
-
-    }
 
     public static Object create(Class<?>[] interfaces) {
 
         InvocationHandler handler = new InvocationHandler() {
 
-            final Map<String, Object> map = new HashMap<>();
+            // A table to store field values
+            private final Map<String, Object> fields = new HashMap<>();
 
             @Override
-            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            public Object invoke(Object proxy, Method method, Object[] args) {
                 String methodName = method.getName();
-                String variableName = methodName.substring(3);
-                if (methodName.startsWith("set")) {
-                    map.put(variableName, args[0]);
-                    return args[0];
-                } else if (methodName.startsWith("get")) {
-                    return map.get(variableName);
+                String propertyName = methodName.substring(3);
+                if (methodName.startsWith("get")) {
+                    // Getter method was called
+                    return fields.get(propertyName);
+                } else if (method.getName().startsWith("set")) {
+                    // Setter method was called
+                    fields.put(propertyName, args[0]);
+                    return null;
+                } else {
+                    // Something went horribly wrong
+                    throw new UnsupportedOperationException();
                 }
-                return null;
             }
         };
 
-        Object o = Proxy.newProxyInstance(String.class.getClassLoader(), interfaces, handler);
-        return o;
+        return Proxy.newProxyInstance(interfaces[0].getClassLoader(), interfaces, handler);
     }
 
-    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException, ClassNotFoundException {
-        Random random = new Random();
-        Class<?>[] interfaces = {Date.class};
-        Object o = create(interfaces);
-        for (Class<?> clazz : interfaces) {
-            for (Method method : clazz.getMethods()) {
-                String name = method.getName();
-                if (name.startsWith("set")) {
-                    // Get the corresponding getter
-                    String getterName = "get" + name.substring(3);
-                    Method getter = clazz.getMethod(getterName);
+    interface MyDate {
 
-                    int number = random.nextInt();
-                    method.invoke(o, number);
+        void setYear(int year);
 
-                    // Check that we got the right value
-                    assertEquals(number, getter.invoke(o));
-                }
-            }
-        }
+        void setMonth(int month);
+
+        int getYear();
+
+        int getMonth();
+    }
+
+    interface MyTime {
+
+        void setHour(int hour);
+
+        int getHour();
+
+        void setMinute(int minute);
+
+        int getMinute();
+    }
+
+    public static void main(String[] args) {
+        Object object = create(new Class[]{MyDate.class, MyTime.class});
+        MyDate myDate = (MyDate) object;
+        myDate.setYear(2017);
+        myDate.setMonth(12);
+        System.out.println(myDate.getYear());
+        System.out.println(myDate.getMonth());
+        MyTime myTime = (MyTime) object;
+        myTime.setHour(12);
+        myTime.setMinute(23);
+        System.out.println(myTime.getHour());
+        System.out.println(myTime.getMinute());
     }
 }

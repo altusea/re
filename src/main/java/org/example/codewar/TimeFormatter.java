@@ -20,7 +20,6 @@ public class TimeFormatter {
         }
     };
 
-    // https://www.codewars.com/kata/52742f58faf5485cae000b9a/train/java
     public static String formatDuration(int seconds) {
         if (seconds == 0) return "now";
 
@@ -54,7 +53,7 @@ public class TimeFormatter {
         }
 
         if (strings.size() == 1) {
-            return strings.get(0);
+            return strings.getFirst();
         } else if (strings.size() == 2) {
             return strings.get(0) + " and " + strings.get(1);
         } else if (strings.size() == 3) {

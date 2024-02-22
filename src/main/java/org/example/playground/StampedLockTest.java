@@ -1,11 +1,16 @@
 package org.example.playground;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.StampedLock;
 
 public class StampedLockTest {
 
+    @Setter
+    @Getter
     public static class Balance {
 
         private int amount;
@@ -14,13 +19,6 @@ public class StampedLockTest {
             this.amount = amount;
         }
 
-        public int getAmount() {
-            return amount;
-        }
-
-        public void setAmount(int amount) {
-            this.amount = amount;
-        }
     }
 
     public static void main(String[] args) {
