@@ -1,19 +1,20 @@
 package org.example.playground;
 
-import java.util.Date;
+import com.google.common.reflect.TypeToken;
+
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ClassTest {
 
-    public static void main() {
+    public static void main(String[] args) {
         System.out.println(Set.class.isAssignableFrom(HashSet.class));
         System.out.println(HashSet.class.isAssignableFrom(Set.class));
 
-        System.out.println(ClassLoader.getSystemClassLoader());
-        System.out.println(ClassLoader.getPlatformClassLoader());
-
-        System.out.println(Date.class.getClassLoader());
-        System.out.println(Car.class.getClassLoader());
+        var token = new TypeToken<List<String>>() {
+        };
+        System.out.println(token.getRawType());
+        System.out.println(token.isSubtypeOf(List.class));
     }
 }
