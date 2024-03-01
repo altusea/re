@@ -1,4 +1,4 @@
-package org.example.visit;
+package org.example.visit.control;
 
 public interface OptionVisitor<T, R> {
 

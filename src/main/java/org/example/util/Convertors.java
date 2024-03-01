@@ -34,6 +34,7 @@ public class Convertors {
         return collection.stream().map(mapper).collect(Collectors.toCollection(ArrayList::new));
     }
 
+    @Unmodifiable
     @Contract(pure = true)
     public static <T, R> ImmutableList<R> mapAsImmutableList(Collection<T> collection, Function<? super T, ? extends R> mapper) {
         if (CollectionUtils.isEmpty(collection)) {
@@ -42,6 +43,7 @@ public class Convertors {
         return collection.stream().map(mapper).collect(ImmutableList.toImmutableList());
     }
 
+    @Unmodifiable
     @Contract(pure = true)
     public static <T, K, V> ImmutableMap<K, V> toImmutableMap(Collection<T> collection,
                                                               Function<? super T, ? extends K> keyMapper,
