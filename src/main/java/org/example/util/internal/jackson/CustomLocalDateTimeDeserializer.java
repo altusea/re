@@ -1,4 +1,4 @@
-package org.example.util.jackson;
+package org.example.util.internal.jackson;
 
 import cn.hutool.core.date.DatePattern;
 import com.fasterxml.jackson.core.JsonParser;

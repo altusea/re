@@ -1,4 +1,4 @@
-package org.example.util.gson;
+package org.example.util.internal.gson;
 
 import cn.hutool.core.date.DatePattern;
 import com.google.gson.Gson;
@@ -10,35 +10,35 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
-import java.time.YearMonth;
+import java.time.LocalDate;
 
-public final class YearMonthTypeAdapter extends TypeAdapter<YearMonth> {
+public final class LocalDateTypeAdapter extends TypeAdapter<LocalDate> {
 
     public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
 
         @Override
         @SuppressWarnings("unchecked")
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
-            return typeToken.getRawType() == YearMonth.class ? (TypeAdapter<T>) new YearMonthTypeAdapter() : null;
+            return typeToken.getRawType() == LocalDate.class ? (TypeAdapter<T>) new LocalDateTypeAdapter() : null;
         }
     };
 
     @Override
-    public void write(final JsonWriter jsonWriter, final YearMonth yearMonth) throws IOException {
-        if (yearMonth == null) {
+    public void write(final JsonWriter jsonWriter, final LocalDate localDate) throws IOException {
+        if (localDate == null) {
             jsonWriter.nullValue();
         } else {
-            jsonWriter.value(yearMonth.format(DatePattern.NORM_MONTH_FORMATTER));
+            jsonWriter.value(localDate.format(DatePattern.NORM_DATE_FORMATTER));
         }
     }
 
     @Override
-    public YearMonth read(final JsonReader jsonReader) throws IOException {
+    public LocalDate read(final JsonReader jsonReader) throws IOException {
         if (jsonReader.peek() == JsonToken.NULL) {
             jsonReader.nextNull();
             return null;
         } else {
-            return YearMonth.parse(jsonReader.nextString(), DatePattern.NORM_MONTH_FORMATTER);
+            return LocalDate.parse(jsonReader.nextString(), DatePattern.NORM_DATE_FORMATTER);
         }
     }
 }

@@ -1,26 +1,11 @@
-/*
- * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *  http://aws.amazon.com/apache2.0
- *
- * or in the "license" file accompanying this file. This file is distributed
- * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
- */
-
 package org.example.util;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.UnaryOperator;
@@ -28,14 +13,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
-import static org.example.util.FunctionalUtils.invokeSafely;
 
 /**
  * A set of utilities that assist with HTTP message-related interactions.
  */
 public final class HttpUtils {
-
-    private static final String DEFAULT_ENCODING = "UTF-8";
 
     /**
      * Characters that we need to fix up after URLEncoder.encode().
@@ -79,7 +61,8 @@ public final class HttpUtils {
      * Encode a string according to RFC 1630: encoding for form data.
      */
     public static String formDataEncode(String value) {
-        return value == null ? null : invokeSafely(() -> URLEncoder.encode(value, DEFAULT_ENCODING));
+        if (value == null) return null;
+        return URLEncoder.encode(value, StandardCharsets.UTF_8);
     }
 
     /**
@@ -94,11 +77,7 @@ public final class HttpUtils {
         if (value == null) {
             return null;
         }
-        try {
-            return URLDecoder.decode(value, DEFAULT_ENCODING);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("Unable to decode value", e);
-        }
+        return URLDecoder.decode(value, StandardCharsets.UTF_8);
     }
 
     /**
@@ -151,7 +130,7 @@ public final class HttpUtils {
             return null;
         }
 
-        String encoded = invokeSafely(() -> URLEncoder.encode(value, DEFAULT_ENCODING));
+        String encoded = URLEncoder.encode(value, StandardCharsets.UTF_8);
 
         if (!ignoreSlashes) {
             return StringUtils.replaceEach(encoded,

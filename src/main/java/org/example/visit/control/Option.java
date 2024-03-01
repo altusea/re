@@ -1,6 +1,6 @@
 package org.example.visit.control;
 
-public abstract class Option<T> {
+public abstract sealed class Option<T> permits Some, None {
 
     public abstract <R> R match(OptionVisitor<? super T, ? extends R> optionVisitor);
 
@@ -29,10 +29,4 @@ public abstract class Option<T> {
         });
     }
 
-    public static void main(String[] args) {
-        Option<String> some = Option.Some("aaa");
-        System.out.println(some.getOrElse("bbb"));
-        Option<String> none = Option.None();
-        System.out.println(none.getOrElse("bbb"));
-    }
 }

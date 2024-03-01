@@ -3,10 +3,10 @@ package org.example.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import org.example.util.gson.DateTypeAdapter;
-import org.example.util.gson.LocalDateTimeTypeAdapter;
-import org.example.util.gson.LocalDateTypeAdapter;
-import org.example.util.gson.YearMonthTypeAdapter;
+import org.example.util.internal.gson.DateTypeAdapter;
+import org.example.util.internal.gson.LocalDateTimeTypeAdapter;
+import org.example.util.internal.gson.LocalDateTypeAdapter;
+import org.example.util.internal.gson.YearMonthTypeAdapter;
 
 public class GsonUtil {
 
