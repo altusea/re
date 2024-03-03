@@ -1,13 +1,9 @@
 package org.example.playground;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@Setter
-@Getter
 public class Organization implements Comparable<Organization> {
 
     private Long id;
@@ -24,6 +20,38 @@ public class Organization implements Comparable<Organization> {
     @Override
     public int compareTo(@NotNull Organization o) {
         return this.id.compareTo(o.getId());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public List<Organization> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Organization> children) {
+        this.children = children;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.example.playground;
 
 import org.agrona.SemanticVersion;
+import org.agrona.SystemUtil;
 import org.agrona.collections.MutableInteger;
 
 public class AgronaTest {
@@ -15,5 +16,7 @@ public class AgronaTest {
         System.out.println(SemanticVersion.major(semanticVersion));
         System.out.println(SemanticVersion.minor(semanticVersion));
         System.out.println(SemanticVersion.patch(semanticVersion));
+
+        System.out.println(SystemUtil.isWindows() ? "Windows" : "Unix");
     }
 }
