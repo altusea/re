@@ -9,7 +9,7 @@ public class UnusedTest {
 
     static <T> int count(@NotNull Iterable<T> orders) {
         int total = 0;
-        for (T _ : orders)    // Unnamed variable
+        for (T _ : orders) // Unnamed variable
             total++;
         return total;
     }

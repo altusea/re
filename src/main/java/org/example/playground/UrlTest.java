@@ -2,8 +2,12 @@ package org.example.playground;
 
 import cn.hutool.core.net.url.UrlBuilder;
 import cn.hutool.core.util.URLUtil;
+import org.example.util.HttpUtils;
 
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+
+import static org.example.playground.CommonTest.printSeparateLine;
 
 public class UrlTest {
 
@@ -17,5 +21,13 @@ public class UrlTest {
         String url = urlBuilder1.build();
         System.out.println(url);
         System.out.println(URLUtil.encode(url, StandardCharsets.UTF_8));
+
+        System.out.println(URLEncoder.encode(url, StandardCharsets.UTF_8));
+
+        printSeparateLine();
+        String url2 = "https://www.google.com?query=todo&timezone=taipei+qwe";
+        System.out.println("net:       " + URLEncoder.encode(url2, StandardCharsets.UTF_8));
+        System.out.println("hutool:    " + URLUtil.encode(url2));
+        System.out.println("HttpUtils: " + HttpUtils.urlEncode(url2));
     }
 }

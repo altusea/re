@@ -16,7 +16,7 @@ public class PredicateTest {
         allPredicates.add(str -> str.length() > 4);
 
         List<String> result = a.stream()
-                .filter(allPredicates.stream().reduce(x -> true, Predicate::and))
+                .filter(allPredicates.stream().reduce(_ -> true, Predicate::and))
                 .toList();
 
         System.out.println(result);
