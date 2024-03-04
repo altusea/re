@@ -1,5 +1,7 @@
 package org.example.playground;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.example.util.GsonUtil;
 
 import java.time.LocalDate;
@@ -9,6 +11,11 @@ import java.time.YearMonth;
 public class GsonTest {
 
     public static void main(String[] args) {
+        Gson gson = new Gson();
+        String jsonString = "{\"key1\":\"value1\",\"key2\":\"value2\"}";
+        JsonObject jsonObject = gson.fromJson(jsonString, JsonObject.class);
+        System.out.println(jsonObject.asMap().size());
+
         TimeHolder clazz = new TimeHolder();
         clazz.setYearMonth(YearMonth.now());
         clazz.setLocalDate(LocalDate.now());

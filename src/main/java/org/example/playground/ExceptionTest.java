@@ -1,12 +1,13 @@
-package org.example.util;
+package org.example.playground;
 
 import com.google.common.util.concurrent.Runnables;
-import com.machinezoo.noexception.Exceptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+
+import static org.example.util.FunctionalUtils.invokeSafely;
 
 public class ExceptionTest {
 
@@ -20,6 +21,6 @@ public class ExceptionTest {
         new Thread(Runnables.doNothing()).start();
 
         LOGGER.info("test log ...");
-        Exceptions.sneak().run(ExceptionTest::throwCheckException);
+        invokeSafely(ExceptionTest::throwCheckException);
     }
 }
