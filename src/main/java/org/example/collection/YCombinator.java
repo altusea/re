@@ -11,7 +11,7 @@ public interface YCombinator {
         return r.apply(r);
     }
 
-    static void main(String... arguments) {
+    static void main(String[] args) {
         Function<Integer, Integer> fib = Y(f -> n ->
                 (n <= 2)
                         ? 1

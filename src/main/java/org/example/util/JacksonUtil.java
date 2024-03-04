@@ -1,8 +1,15 @@
 package org.example.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.machinezoo.noexception.Exceptions;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.util.List;
+import java.util.Map;
+
+import static org.example.util.FunctionalUtils.invokeSafely;
 
 public class JacksonUtil {
 
@@ -13,10 +20,45 @@ public class JacksonUtil {
     }
 
     public static <T> T fromJson(String jsonStr, Class<T> valueType) {
-        return Exceptions.sneak().get(() -> OBJECT_MAPPER.readValue(jsonStr, valueType));
+        return invokeSafely(() -> OBJECT_MAPPER.readValue(jsonStr, valueType));
     }
 
     public static <T> T fromJson(String jsonStr, TypeReference<T> valueTypeRef) {
-        return Exceptions.sneak().get(() -> OBJECT_MAPPER.readValue(jsonStr, valueTypeRef));
+        return invokeSafely(() -> OBJECT_MAPPER.readValue(jsonStr, valueTypeRef));
+    }
+
+    public static <T> T fromJson(String jsonStr, JavaType valueType) {
+        return invokeSafely(() -> OBJECT_MAPPER.readValue(jsonStr, valueType));
+    }
+
+    public static JavaType buildJavaTypeLinearly(Class<?>... classes) {
+        if (ArrayUtils.isEmpty(classes)) {
+            return null;
+        }
+        TypeFactory typeFactory = OBJECT_MAPPER.getTypeFactory();
+        int n = classes.length;
+        if (n == 1) {
+            return typeFactory.constructType(classes[0]);
+        } else if (n == 2) {
+            return typeFactory.constructParametricType(classes[0], classes[1]);
+        } else {
+            int cur = n - 3;
+            JavaType out = typeFactory.constructParametricType(classes[cur + 1], classes[cur + 2]);
+            while (cur > -1) {
+                var inner = out;
+                out = typeFactory.constructParametricType(classes[cur--], inner);
+            }
+            return out;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(buildJavaTypeLinearly());
+        System.out.println(buildJavaTypeLinearly(String.class));
+        System.out.println(buildJavaTypeLinearly(List.class, Integer.class));
+        System.out.println(buildJavaTypeLinearly(List.class, List.class, String.class));
+
+        TypeFactory typeFactory = OBJECT_MAPPER.getTypeFactory();
+        System.out.println(typeFactory.constructMapType(Map.class, String.class, Integer.class));
     }
 }
