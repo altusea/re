@@ -16,7 +16,6 @@
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <logback.version>1.2.13</logback.version>
         <guava.version>33.0.0-jre</guava.version>
-        <commons-compress.version>1.26.0</commons-compress.version>
         <fastjson.version>2.0.47</fastjson.version>
     </properties>
 
@@ -32,7 +31,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
-                <version>2.16.1</version>
+                <version>2.16.2</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -44,6 +43,16 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.14.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.15.1</version>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -59,22 +68,6 @@
             <groupId>org.glavo.kala</groupId>
             <artifactId>kala-common</artifactId>
             <version>${kala.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>easyexcel</artifactId>
-            <version>3.3.3</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-compress</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-compress</artifactId>
-            <version>${commons-compress.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/it.unimi.dsi/fastutil-core -->
         <dependency>
@@ -215,7 +208,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.12.1</version>
                 <configuration>
-                    <compilerArgs>--enable-preview</compilerArgs>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>

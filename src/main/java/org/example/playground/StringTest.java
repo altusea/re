@@ -5,6 +5,15 @@ import java.util.regex.Pattern;
 
 public class StringTest {
 
+    public static char[] lengthOf(String s) {
+        char[] cs;
+        switch (s) {
+            case null -> cs = new char[0];
+            case String _ -> cs = s.toCharArray();
+        }
+        return cs;
+    }
+
     public static void main(String[] args) {
         String link = "https://test.regex.com/markStart/water/123456-ff3fd979581267a4";
         Pattern pattern = Pattern.compile("markStart/(\\w+)/(\\d+)-([0-9a-f]{16})$");
@@ -17,7 +26,7 @@ public class StringTest {
             System.out.println("not matched!");
         }
 
-        final String MSG = "{\"encrypt\":\"%1$s\",\"msgsignature\":\"%2$s\",\"timestamp\":\"%3$s\",\"nonce\":\"%4$s\"}";
-        System.out.printf((MSG) + "%n", 1, 2, "xx3", 4);
+        final String MSG = "{\"encrypt\":\"%1$s\",\"msg_signature\":\"%2$s\",\"timestamp\":\"%3$s\",\"nonce\":\"%4$s\"}";
+        System.out.printf(MSG + "%n", 1, 2, "xx3", 4);
     }
 }
