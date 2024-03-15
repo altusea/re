@@ -19,16 +19,20 @@ public class JacksonUtil {
         OBJECT_MAPPER = JacksonObjectMapperFactory.create();
     }
 
-    public static <T> T fromJson(String jsonStr, Class<T> valueType) {
-        return invokeSafely(() -> OBJECT_MAPPER.readValue(jsonStr, valueType));
+    public static String toJson(Object value) {
+        return invokeSafely(() -> OBJECT_MAPPER.writeValueAsString(value));
     }
 
-    public static <T> T fromJson(String jsonStr, TypeReference<T> valueTypeRef) {
-        return invokeSafely(() -> OBJECT_MAPPER.readValue(jsonStr, valueTypeRef));
+    public static <T> T fromJson(String content, Class<T> valueType) {
+        return invokeSafely(() -> OBJECT_MAPPER.readValue(content, valueType));
     }
 
-    public static <T> T fromJson(String jsonStr, JavaType valueType) {
-        return invokeSafely(() -> OBJECT_MAPPER.readValue(jsonStr, valueType));
+    public static <T> T fromJson(String content, TypeReference<T> valueTypeRef) {
+        return invokeSafely(() -> OBJECT_MAPPER.readValue(content, valueTypeRef));
+    }
+
+    public static <T> T fromJson(String content, JavaType valueType) {
+        return invokeSafely(() -> OBJECT_MAPPER.readValue(content, valueType));
     }
 
     public static JavaType buildJavaTypeLinearly(Class<?>... classes) {

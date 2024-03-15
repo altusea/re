@@ -14,7 +14,9 @@ public class UrlTest {
     public static void main(String[] args) {
         UrlBuilder urlBuilder = UrlBuilder.of("https://www.google.com", StandardCharsets.UTF_8);
         urlBuilder.addQuery("order", "ascend");
+        urlBuilder.addQuery("name", "张三");
         System.out.println(urlBuilder.build());
+        System.out.println(HttpUtils.urlEncode("张三"));
 
         UrlBuilder urlBuilder1 = UrlBuilder.of("https://www.google.com?order=ascend", StandardCharsets.UTF_8);
         urlBuilder1.addQuery("pageSize", 10);
