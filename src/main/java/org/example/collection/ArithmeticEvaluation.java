@@ -1,6 +1,7 @@
 package org.example.collection;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class ArithmeticEvaluation {
 
@@ -80,7 +81,7 @@ public class ArithmeticEvaluation {
         }
     }
 
-    private static void createNewOperand(BinaryOperator operator, Stack<Expression> operands) {
+    private static void createNewOperand(BinaryOperator operator, Deque<Expression> operands) {
         Expression rightOperand = operands.pop();
         Expression leftOperand = operands.pop();
         operands.push(new BinaryExpression(leftOperand, operator, rightOperand));
@@ -89,8 +90,8 @@ public class ArithmeticEvaluation {
     public static Expression parse(String input) {
         int curIndex = 0;
         boolean afterOperand = false;
-        Stack<Expression> operands = new Stack<>();
-        Stack<Object> operators = new Stack<>();
+        Deque<Expression> operands = new ArrayDeque<>();
+        Deque<Object> operators = new ArrayDeque<>();
         while (curIndex < input.length()) {
             int startIndex = curIndex;
             char c = input.charAt(curIndex++);

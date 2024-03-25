@@ -222,7 +222,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.12.1</version>
                 <configuration>
-                    <compilerArgs>--enable-preview</compilerArgs>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>

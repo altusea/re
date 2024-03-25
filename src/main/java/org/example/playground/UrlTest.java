@@ -12,6 +12,25 @@ import static org.example.playground.CommonTest.printSeparateLine;
 public class UrlTest {
 
     public static void main(String[] args) {
+        System.out.println("test anchor:");
+        String anchorUrl = UrlBuilder.of("https://www.baidu.com#toc")
+                .addQuery("key1", "a")
+                .addQuery("key2", "b")
+                .build();
+        System.out.println(anchorUrl);
+
+        printSeparateLine();
+
+        System.out.println("test anchor 2:");
+        String anchorUrl2 = UrlBuilder.of("https://www.baidu.com#toc")
+                .addQuery("key1", "a")
+                .addQuery("key2", "b")
+                .setFragment("/login")
+                .build();
+        System.out.println(anchorUrl2);
+
+        printSeparateLine();
+
         UrlBuilder urlBuilder = UrlBuilder.of("https://www.google.com", StandardCharsets.UTF_8);
         urlBuilder.addQuery("order", "ascend");
         urlBuilder.addQuery("name", "张三");
