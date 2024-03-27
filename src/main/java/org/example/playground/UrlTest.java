@@ -32,6 +32,8 @@ public class UrlTest {
         printSeparateLine();
 
         UrlBuilder urlBuilder = UrlBuilder.of("https://www.google.com", StandardCharsets.UTF_8);
+        urlBuilder.addPath("/path1/path2");
+        urlBuilder.addPathSegment("path3");
         urlBuilder.addQuery("order", "ascend");
         urlBuilder.addQuery("name", "张三");
         System.out.println(urlBuilder.build());
