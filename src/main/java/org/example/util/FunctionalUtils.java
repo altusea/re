@@ -157,11 +157,11 @@ public final class FunctionalUtils {
     }
 
     private static RuntimeException asRuntimeException(Exception exception) {
-        if (exception instanceof RuntimeException) {
-            return (RuntimeException) exception;
+        if (exception instanceof RuntimeException runtimeException) {
+            return runtimeException;
         }
-        if (exception instanceof IOException) {
-            return new UncheckedIOException((IOException) exception);
+        if (exception instanceof IOException ioException) {
+            return new UncheckedIOException(ioException);
         }
         if (exception instanceof InterruptedException) {
             Thread.currentThread().interrupt();
