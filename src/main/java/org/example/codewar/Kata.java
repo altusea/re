@@ -7,6 +7,72 @@ import java.util.stream.IntStream;
 
 public class Kata {
 
+    public static String shortcut(String input) {
+        StringBuilder sb = new StringBuilder();
+        Set<Character> set = Set.of('a', 'e', 'i', 'o', 'u');
+        for (char c : input.toCharArray()) {
+            if (!set.contains(c)) {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    public static String fakeBin(String numberString) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : numberString.toCharArray()) {
+            if (c < '5') {
+                sb.append('0');
+            } else {
+                sb.append('1');
+            }
+        }
+        return sb.toString();
+    }
+
+    public static long numberOfDivisors(int n) {
+        int i = 1, cnt = 0;
+        int tmp;
+        while ((tmp = i * i) <= n) {
+            if (tmp == n) {
+                cnt++;
+                break;
+            } else if (n % i == 0) {
+                cnt += 2;
+            }
+            i++;
+        }
+        return cnt;
+    }
+
+    public static String rangeExtraction(int[] arr) {
+        List<String> formattedList = new ArrayList<>();
+        int i = 0;
+
+        while (i < arr.length) {
+            int start = arr[i];
+            int end = start;
+
+            while (i + 1 < arr.length && arr[i + 1] == end + 1) {
+                end = arr[i + 1];
+                i++;
+            }
+
+            if (end - start >= 2) {
+                formattedList.add(start + "-" + end);
+            } else {
+                formattedList.add(String.valueOf(start));
+                if (end != start) {
+                    formattedList.add(String.valueOf(end));
+                }
+            }
+
+            i++;
+        }
+
+        return String.join(",", formattedList);
+    }
+
     public static String binaryAddition(int a, int b) {
         int sum = a + b;
         return Integer.toBinaryString(sum);
@@ -196,11 +262,5 @@ public class Kata {
         if (carry == 1) sb.append(1);
         String tmpRes = sb.reverse().toString();
         return StringUtils.stripStart(tmpRes, "0");
-    }
-
-    public static int fusc(int n) {
-        if (n == 0 || n == 1) return n;
-        if (n % 2 == 0) return fusc(n / 2);
-        return fusc(n / 2) + fusc(n / 2 + 1);
     }
 }
