@@ -127,27 +127,6 @@ public class Kata {
         return res;
     }
 
-    public static double[] tribonacci(double[] s, int n) {
-        double[] res = new double[n];
-        if (n == 0) return res;
-        int i = 0;
-        while (i < Math.min(n, 3)) {
-            res[i] = s[i];
-            i++;
-        }
-        if (n < 4) return res;
-        double a = res[i - 3], b = res[i - 2], c = res[i - 1], tmp;
-        while (i < n) {
-            tmp = a + b + c;
-            a = b;
-            b = c;
-            c = tmp;
-            res[i] = tmp;
-            i++;
-        }
-        return res;
-    }
-
     public static int findEvenIndex(int[] arr) {
         int sum = 0;
         for (int i : arr) sum += i;

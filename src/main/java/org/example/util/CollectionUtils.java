@@ -21,12 +21,16 @@ public final class CollectionUtils {
         return collection == null || collection.isEmpty();
     }
 
+    public static boolean isNotEmpty(Collection<?> collection) {
+        return !isNullOrEmpty(collection);
+    }
+
     public static boolean isNullOrEmpty(Map<?, ?> map) {
         return map == null || map.isEmpty();
     }
 
     public static boolean isNotEmpty(Map<?, ?> map) {
-        return map != null && !map.isEmpty();
+        return !isNullOrEmpty(map);
     }
 
     /**
@@ -208,5 +212,10 @@ public final class CollectionUtils {
         for (int i = 0; i < result.size(); i++) {
             System.out.println("List " + (i + 1) + ": " + result.get(i));
         }
+
+        List<String> a = List.of("a", "b", "c", "b", "a");
+        Set<String> b = Set.copyOf(a);
+        System.out.println(a.size());
+        System.out.println(b.size());
     }
 }

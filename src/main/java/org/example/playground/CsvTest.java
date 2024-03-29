@@ -40,7 +40,5 @@ public class CsvTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }
