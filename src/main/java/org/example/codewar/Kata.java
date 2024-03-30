@@ -7,6 +7,40 @@ import java.util.stream.IntStream;
 
 public class Kata {
 
+    public static String expandedForm(int num) {
+        StringBuilder zeros = new StringBuilder();
+        List<String> acc = new ArrayList<>();
+        while (num != 0) {
+            int remain = num % 10;
+            if (remain != 0) {
+                acc.add(num % 10 + zeros.toString());
+            }
+            zeros.insert(0, "0");
+            num /= 10;
+        }
+        Collections.reverse(acc);
+        return StringUtils.join(acc, " + ");
+    }
+
+    public String spinWords(String sentence) {
+        String[] words = sentence.split(" ");
+        StringBuilder result = new StringBuilder();
+
+        for (String word : words) {
+            if (word.length() >= 5) {
+                StringBuilder reversedWord = new StringBuilder(word);
+                word = reversedWord.reverse().toString();
+            }
+            result.append(word).append(" ");
+        }
+
+        return result.toString().trim();
+    }
+
+    public static int[] find(int base, int limit) {
+        return IntStream.iterate(base, i -> i <= limit, i -> i + base).toArray();
+    }
+
     public static String binaryAddition(int a, int b) {
         int sum = a + b;
         return Integer.toBinaryString(sum);
