@@ -1,11 +1,13 @@
 package org.example.playground;
 
+import cn.hutool.core.util.StrUtil;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringTest {
 
-    public static char[] lengthOf(String s) {
+    public static char[] toCharArray(String s) {
         char[] cs;
         switch (s) {
             case null -> cs = new char[0];
@@ -15,6 +17,11 @@ public class StringTest {
     }
 
     public static void main(String[] args) {
+        String a = "hello about 中国 西方 二分 earth all.";
+        System.out.println("raw length: " + a.length());
+        System.out.println("hutool length: " + StrUtil.length(a));
+        System.out.println(StrUtil.replaceByCodePoint(a, 12, 20, "r"));
+
         String link = "https://test.regex.com/markStart/water/123456-ff3fd979581267a4";
         Pattern pattern = Pattern.compile("markStart/(\\w+)/(\\d+)-([0-9a-f]{16})$");
         Matcher matcher = pattern.matcher(link);

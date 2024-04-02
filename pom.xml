@@ -11,7 +11,7 @@
     <properties>
         <maven.compiler.release>22</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hutool.version>5.8.26</hutool.version>
+        <hutool.version>5.8.27</hutool.version>
         <kala.version>0.69.0</kala.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <logback.version>1.2.13</logback.version>
