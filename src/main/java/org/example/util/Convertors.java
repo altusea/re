@@ -8,10 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Unmodifiable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -41,6 +38,17 @@ public class Convertors {
             return ImmutableList.of();
         }
         return collection.stream().map(mapper).collect(ImmutableList.toImmutableList());
+    }
+
+    @Unmodifiable
+    @Contract(pure = true)
+    public static <T, K, V> Map<K, V> toUnmodifiableMap(Collection<T> collection,
+                                                        Function<? super T, ? extends K> keyMapper,
+                                                        Function<? super T, ? extends V> valueMapper) {
+        if (CollectionUtils.isEmpty(collection)) {
+            return Map.of();
+        }
+        return collection.stream().collect(Collectors.toUnmodifiableMap(keyMapper, valueMapper));
     }
 
     @Unmodifiable
