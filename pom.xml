@@ -19,7 +19,7 @@
         <fastjson.version>2.0.49</fastjson.version>
         <jackson.version>2.17.0</jackson.version>
         <http-components.version>5.3.1</http-components.version>
-        <okhttp.version>5.0.0-alpha.12</okhttp.version>
+        <okhttp.version>5.0.0-alpha.14</okhttp.version>
     </properties>
 
     <dependencyManagement>
@@ -88,11 +88,6 @@
             <version>1.21.1</version>
         </dependency>
         <dependency>
-            <groupId>org.choco-solver</groupId>
-            <artifactId>choco-solver</artifactId>
-            <version>4.10.14</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
             <version>3.1.8</version>
@@ -138,11 +133,6 @@
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5</artifactId>
             <version>${http-components.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.aviator</groupId>
-            <artifactId>aviator</artifactId>
-            <version>5.4.1</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
