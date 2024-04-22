@@ -6,6 +6,8 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.net.SocketTimeoutException;
+
 public class RetryUtilTest {
 
     @Test
@@ -33,6 +35,14 @@ public class RetryUtilTest {
         CheckedSupplier<Integer> callable = () -> {
             throw new NotImplementedException();
         };
-        Assertions.assertThrows(RuntimeException.class, () -> RetryUtil.withTry(callable, 3, null));
+        Assertions.assertThrows(NotImplementedException.class, () -> RetryUtil.withTry(callable, 3, null));
+    }
+
+    @Test
+    void testThrowingCallable2() {
+        CheckedSupplier<Integer> callable = () -> {
+            throw new NotImplementedException();
+        };
+        Assertions.assertThrows(NotImplementedException.class, () -> RetryUtil.withTry(callable, 3, ex -> ex instanceof SocketTimeoutException));
     }
 }
