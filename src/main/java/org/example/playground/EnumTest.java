@@ -2,7 +2,11 @@ package org.example.playground;
 
 import org.apache.commons.lang3.EnumUtils;
 
+import java.util.EnumSet;
 import java.util.Map;
+import java.util.Set;
+
+import static org.example.playground.CommonTest.printSeparateLine;
 
 public class EnumTest {
 
@@ -24,8 +28,42 @@ public class EnumTest {
         }
     }
 
+    enum EmployeePosition {
+        SRE,
+        ARCHITECT,
+        DEVELOPER
+    }
+
     public static void main(String[] args) {
         Map<String, Color> map = EnumUtils.getEnumMap(Color.class, Color::getCode);
         System.out.println(map.get(Color.RED.code));
+
+        // with EnumSet
+        printSeparateLine();
+        var x = EnumSet.of(
+                EmployeePosition.SRE,
+                EmployeePosition.ARCHITECT,
+                EmployeePosition.DEVELOPER);
+        long begX = System.nanoTime();
+        for (int i = 0; i < 100_000_000; i++) {
+            var es = EnumSet.allOf(EmployeePosition.class);
+            es.containsAll(x);
+        }
+        long endX = System.nanoTime();
+        System.out.println(x.getClass() + ": " + (endX - begX) / 1e9);
+
+        // with Set
+        printSeparateLine();
+        var y = Set.of(
+                EmployeePosition.SRE,
+                EmployeePosition.ARCHITECT,
+                EmployeePosition.DEVELOPER);
+        long begY = System.nanoTime();
+        for (int i = 0; i < 100_000_000; i++) {
+            var hs = Set.of(EmployeePosition.values());
+            hs.containsAll(y);
+        }
+        long endY = System.nanoTime();
+        System.out.println(y.getClass() + ": " + (endY - begY) / 1e9);
     }
 }
