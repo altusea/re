@@ -2,14 +2,15 @@ package org.example.codewar;
 
 public class Base36 {
 
-    public static String convertToBase36(int decimalNumber) {
+    public static String convertToBase36(final int decimalNumber) {
         if (decimalNumber < 0) throw new IllegalArgumentException();
         if (decimalNumber == 0) return "0";
+        var decimal = decimalNumber;
         StringBuilder sb = new StringBuilder();
-        while (decimalNumber != 0) {
-            int remainder = decimalNumber % 36;
+        while (decimal != 0) {
+            int remainder = decimal % 36;
             sb.append(getCharacter(remainder));
-            decimalNumber /= 36;
+            decimal /= 36;
         }
         return sb.reverse().toString();
     }

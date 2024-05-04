@@ -16,5 +16,8 @@ public class LangTest {
 
         Consumer<String> consumer = Consumers.nop();
         consumer.accept("hello");
+
+        System.out.println(Integer.toBinaryString('A'));
+        System.out.println(Integer.toBinaryString('a'));
     }
 }

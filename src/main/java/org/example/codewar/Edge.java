@@ -1,6 +1,6 @@
 package org.example.codewar;
 
-class Edge {
+public class Edge {
     Vertex v1;
     Vertex v2;
 

@@ -10,11 +10,11 @@ public final class ClassLoaderHelper {
             return null;
         }
 
-        for (Class<?> clzz : classes) {
-            if (clzz == null) {
+        for (Class<?> clazz : classes) {
+            if (clazz == null) {
                 continue;
             }
-            ClassLoader loader = clzz.getClassLoader();
+            ClassLoader loader = clazz.getClassLoader();
             if (loader != null) {
                 try {
                     return loader.loadClass(fqcn);

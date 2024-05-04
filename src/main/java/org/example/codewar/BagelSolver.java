@@ -21,7 +21,7 @@ public class BagelSolver {
             modifiedField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
 
             field.set(null, false);
-        } catch (Exception e) {
+        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
             System.out.println(e.getMessage());
         }
         return new Bagel();
