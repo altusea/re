@@ -47,7 +47,7 @@ public class PisanoPeriod {
     }
 
 
-    private static Map<Long, Long> PERIOD_MEMO = new HashMap<>();
+    private static final Map<Long, Long> PERIOD_MEMO = new HashMap<>();
 
     static {
         PERIOD_MEMO.put(2L, 3L);
