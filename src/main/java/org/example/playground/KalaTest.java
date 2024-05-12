@@ -5,6 +5,8 @@ import kala.collection.immutable.ImmutableMap;
 import kala.collection.mutable.*;
 import kala.control.Either;
 import kala.control.Result;
+import kala.control.Try;
+import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -54,5 +56,13 @@ public class KalaTest {
         System.out.println(result1);
         Result<?, String> result2 = Result.err("500");
         System.out.println(result2);
+
+        System.out.println("\n=====> Try");
+        Try<String> stringTry = Try.of(() -> "hello");
+        System.out.println(stringTry.isSuccess());
+        Try<String> stringTry1 = Try.of(() -> {
+            throw new NotImplementedException();
+        });
+        System.out.println(stringTry1.isSuccess());
     }
 }

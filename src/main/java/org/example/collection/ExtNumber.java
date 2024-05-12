@@ -85,7 +85,7 @@ public final class ExtNumber extends Number implements Serializable {
             case Long l -> BigDecimal.valueOf(l);
             case BigDecimal bigDecimal -> bigDecimal;
             case BigInteger bigInteger -> new BigDecimal(bigInteger);
-            case null, default -> new BigDecimal(numberValue.toString());
+            default -> new BigDecimal(numberValue.toString());
         };
     }
 
@@ -280,10 +280,10 @@ public final class ExtNumber extends Number implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ExtNumber sdkNumber)) {
+        if (!(o instanceof ExtNumber extNumber)) {
             return false;
         }
-        return Objects.equals(stringValue(), sdkNumber.stringValue());
+        return Objects.equals(stringValue(), extNumber.stringValue());
     }
 
     @Override

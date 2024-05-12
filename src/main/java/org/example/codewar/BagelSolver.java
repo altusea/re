@@ -1,9 +1,14 @@
 package org.example.codewar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public class BagelSolver {
+
+    private static final Logger log = LoggerFactory.getLogger(BagelSolver.class);
 
     public static class Bagel {
         public final int getValue() {
@@ -21,8 +26,9 @@ public class BagelSolver {
             modifiedField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
 
             field.set(null, false);
-        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-            System.out.println(e.getMessage());
+        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException |
+                 IllegalAccessException e) {
+            log.error(e.getMessage());
         }
         return new Bagel();
     }
