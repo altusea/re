@@ -2,6 +2,7 @@ package org.example.playground;
 
 import cn.hutool.core.lang.id.NanoId;
 import com.fasterxml.uuid.Generators;
+import com.fasterxml.uuid.NoArgGenerator;
 
 import java.util.UUID;
 
@@ -14,19 +15,25 @@ public class UUIDTest {
         System.out.println(NanoId.randomNanoId());
 
         printSeparateLine();
-        UUID v1 = Generators.timeBasedGenerator().generate();
+        NoArgGenerator v1Gen = Generators.timeBasedGenerator();
+        UUID v1 = v1Gen.generate();
         System.out.println("timeBasedGenerator:");
+        System.out.println(v1Gen.getType());
         System.out.println("UUID Version 1: " + v1);
         System.out.println(v1.timestamp());
 
         printSeparateLine();
         System.out.println("timeBasedReorderedGenerator:");
-        UUID v6 = Generators.timeBasedReorderedGenerator().generate();
+        NoArgGenerator v6Gen = Generators.timeBasedReorderedGenerator();
+        System.out.println(v6Gen.getType());
+        UUID v6 = v6Gen.generate();
         System.out.println("UUID Version 6: " + v6);
 
         printSeparateLine();
         System.out.println("timeBasedEpochGenerator:");
-        UUID v7 = Generators.timeBasedEpochGenerator().generate();
+        NoArgGenerator v7Gen = Generators.timeBasedEpochGenerator();
+        System.out.println(v7Gen.getType());
+        UUID v7 = v7Gen.generate();
         System.out.println("UUID Version 7: " + v7);
     }
 }
