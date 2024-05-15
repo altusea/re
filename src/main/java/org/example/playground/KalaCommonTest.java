@@ -2,6 +2,7 @@ package org.example.playground;
 
 import kala.collection.immutable.ImmutableArray;
 import kala.collection.immutable.ImmutableMap;
+import kala.collection.immutable.ImmutableVector;
 import kala.collection.mutable.*;
 import kala.control.Either;
 import kala.control.Result;
@@ -11,7 +12,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class KalaTest {
+public class KalaCommonTest {
 
     public static void main(String[] args) {
         System.out.println("=====> Either");
@@ -64,5 +65,9 @@ public class KalaTest {
             throw new NotImplementedException();
         });
         System.out.println(stringTry1.isSuccess());
+
+        System.out.println("\n=====> Immutable Vectors");
+        ImmutableVector<String> immutableVector = ImmutableVector.fill(5, "String");
+        System.out.println(immutableVector.size());
     }
 }
