@@ -1,4 +1,4 @@
-package org.example.codewar;
+package org.example.playground;
 
 import java.util.stream.Gatherers;
 import java.util.stream.Stream;

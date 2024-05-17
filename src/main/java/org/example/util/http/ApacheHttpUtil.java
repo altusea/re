@@ -1,37 +1,42 @@
-package org.example.util;
+package org.example.util.http;
 
 import org.apache.commons.collections4.MapUtils;
-import org.apache.hc.client5.http.ClientProtocolException;
 import org.apache.hc.client5.http.classic.HttpClient;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.config.ConnectionConfig;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.cookie.StandardCookieSpec;
+import org.apache.hc.client5.http.impl.classic.BasicHttpClientResponseHandler;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
 import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
 import org.apache.hc.core5.http.*;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
 import org.apache.hc.core5.http.io.SocketConfig;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.hc.core5.http.io.support.ClassicRequestBuilder;
-import org.apache.hc.core5.http.message.StatusLine;
 import org.apache.hc.core5.pool.PoolConcurrencyPolicy;
 import org.apache.hc.core5.pool.PoolReusePolicy;
 import org.apache.hc.core5.ssl.SSLContexts;
 import org.apache.hc.core5.util.TimeValue;
 import org.apache.hc.core5.util.Timeout;
+import org.example.util.JacksonUtil;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.Map;
+
+import static org.example.playground.CommonTest.printSeparateLine;
 
 public class ApacheHttpUtil {
 
     private static final PoolingHttpClientConnectionManager CONN_MANAGER;
 
     private static final HttpClient HTTP_CLIENT;
+
+    private static final HttpClientResponseHandler<String> DEFAULT_RESPONSE_HANDLER = new BasicHttpClientResponseHandler();
 
     static {
         CONN_MANAGER = PoolingHttpClientConnectionManagerBuilder.create()
@@ -58,18 +63,16 @@ public class ApacheHttpUtil {
     }
 
     private static String executeRequest(ClassicHttpRequest request) {
-
         try {
-            return HTTP_CLIENT.execute(request, response -> {
-                if (response.getCode() >= 300) {
-                    throw new ClientProtocolException(new StatusLine(response).toString());
-                }
-                final HttpEntity responseEntity = response.getEntity();
-                if (responseEntity == null) {
-                    return null;
-                }
-                return EntityUtils.toString(responseEntity);
-            });
+            return HTTP_CLIENT.execute(request, DEFAULT_RESPONSE_HANDLER);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    private static String executeRequestWithProxy(ClassicHttpRequest request, HttpHost proxy) {
+        try {
+            return HTTP_CLIENT.execute(proxy, request, DEFAULT_RESPONSE_HANDLER);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
@@ -101,5 +104,24 @@ public class ApacheHttpUtil {
 
         String bodyStr = executeRequest(requestBuilder.build());
         return JacksonUtil.fromJson(bodyStr, responseType);
+    }
+
+    public static String get(String url) {
+        HttpGet httpGet = new HttpGet(url);
+        return executeRequest(httpGet);
+    }
+
+    public static String getWithProxy(String url, HttpHost proxy) {
+        HttpGet httpGet = new HttpGet(url);
+        return executeRequestWithProxy(httpGet, proxy);
+    }
+
+    public static void main(String[] args) {
+        String url = "https://www.baidu.com";
+        System.out.println(get(url));
+
+        printSeparateLine();
+        HttpHost proxy = new HttpHost("127.0.0.1", 1234);
+        System.out.println(getWithProxy(url, proxy));
     }
 }
