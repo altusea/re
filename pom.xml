@@ -9,7 +9,7 @@
     <version>2024.0.5</version>
 
     <properties>
-        <maven.compiler.release>23</maven.compiler.release>
+        <maven.compiler.release>22</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hutool.version>5.8.27</hutool.version>
         <kala.version>0.72.0</kala.version>
@@ -32,7 +32,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.11.0-M1</version>
+                <version>5.11.0-M2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -199,7 +199,6 @@
                     <showDeprecation>true</showDeprecation>
                     <compilerArgs>
                         <compilerArg>--enable-preview</compilerArg>
-                        <compilerArg>--add-modules=jdk.incubator.vector</compilerArg>
                     </compilerArgs>
                 </configuration>
             </plugin>
