@@ -1,21 +1,21 @@
 package org.example.visit.control;
 
-public abstract sealed class Option<T> permits Some, None {
+public sealed interface Option<T> permits Some, None {
 
-    public abstract <R> R match(OptionVisitor<? super T, ? extends R> optionVisitor);
+    <R> R match(OptionVisitor<? super T, ? extends R> optionVisitor);
 
-    public static <T> Option<T> Some(T v) {
+    static <T> Option<T> Some(T v) {
         if (v == null) {
             throw new NullPointerException();
         }
         return new Some<>(v);
     }
 
-    public static <T> Option<T> None() {
+    static <T> Option<T> None() {
         return new None<>();
     }
 
-    public T getOrElse(T other) {
+    default T getOrElse(T other) {
         return this.match(new OptionVisitor<>() {
             @Override
             public T forSome(T v) {
@@ -27,6 +27,13 @@ public abstract sealed class Option<T> permits Some, None {
                 return other;
             }
         });
+    }
+
+    default T getOrElse2(T other) {
+        if (this instanceof Some(T v)) {
+            return v;
+        }
+        return other;
     }
 
 }

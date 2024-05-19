@@ -1,17 +1,34 @@
 package org.example.playground;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.net.url.UrlBuilder;
+import cn.hutool.core.net.url.UrlQuery;
 import cn.hutool.core.util.URLUtil;
 import org.example.util.HttpUtils;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 import static org.example.playground.CommonTest.printSeparateLine;
 
 public class UrlTest {
 
     public static void main(String[] args) {
+        System.out.println(Convert.toStr("测试"));
+        System.out.println(URLEncoder.encode("测试", StandardCharsets.UTF_8));
+        System.out.println(URLEncoder.encode("hello", StandardCharsets.UTF_8));
+
+        UrlQuery urlQuery = new UrlQuery();
+        urlQuery.add("a", "xxx");
+        urlQuery.add("b", "yyy");
+        urlQuery.add("a", "zzz");
+        System.out.println(urlQuery.build(StandardCharsets.UTF_8));
+
+        Map<String, String> parmas = Map.of("a", "a", "b", "测试");
+        System.out.println(UrlQuery.of(parmas).build(StandardCharsets.UTF_8));
+
+
         System.out.println("test anchor:");
         String anchorUrl = UrlBuilder.of("https://www.baidu.com#toc")
                 .addQuery("key1", "a")

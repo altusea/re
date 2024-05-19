@@ -1,6 +1,9 @@
 package org.example.playground;
 
 import org.apache.commons.io.FileUtils;
+import org.example.collection.ReversalGame;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +14,8 @@ import java.nio.file.Files;
 
 public class FileTest {
 
+    private static final Logger log = LoggerFactory.getLogger(ReversalGame.class);
+
     public static void main(String[] args) {
         try {
             File tempFile = Files.createTempFile("content", null).toFile();
@@ -20,8 +25,8 @@ public class FileTest {
             System.out.println(FileUtils.sizeOf(tempFile));
             FileUtils.delete(tempFile);
 
-        } catch (IOException | URISyntaxException e) {
-            throw new RuntimeException();
+        } catch (IOException | URISyntaxException _) {
+            log.info("exception threw ...");
         }
     }
 }

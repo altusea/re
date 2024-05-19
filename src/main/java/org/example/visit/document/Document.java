@@ -38,7 +38,7 @@ public interface Document extends Serializable {
     /**
      * Create {@link Document} from a {@link ExtNumber}.
      *
-     * @param number {@link ExtNumber} sdkNumber with the given precision type.
+     * @param number {@link ExtNumber} extNumber with the given precision type.
      * @return Implementation of Document that stores a {@link ExtNumber}.
      */
     static Document fromNumber(ExtNumber number) {

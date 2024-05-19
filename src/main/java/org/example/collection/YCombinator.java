@@ -3,6 +3,7 @@ package org.example.collection;
 import java.util.function.Function;
 
 public interface YCombinator {
+
     interface RecursiveFunction<F> extends Function<RecursiveFunction<F>, F> {
     }
 

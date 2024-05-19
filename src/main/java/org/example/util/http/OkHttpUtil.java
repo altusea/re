@@ -1,4 +1,4 @@
-package org.example.util;
+package org.example.util.http;
 
 import cn.hutool.core.net.url.UrlBuilder;
 import dev.failsafe.RetryPolicy;
@@ -6,6 +6,7 @@ import dev.failsafe.okhttp.FailsafeCall;
 import okhttp3.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
+import org.example.util.GsonUtil;
 
 import java.io.IOException;
 import java.net.Proxy;

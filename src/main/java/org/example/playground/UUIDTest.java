@@ -1,25 +1,39 @@
 package org.example.playground;
 
+import cn.hutool.core.lang.id.NanoId;
 import com.fasterxml.uuid.Generators;
+import com.fasterxml.uuid.NoArgGenerator;
 
 import java.util.UUID;
+
+import static org.example.playground.CommonTest.printSeparateLine;
 
 public class UUIDTest {
 
     public static void main(String[] args) {
-        UUID v1 = Generators.timeBasedGenerator().generate();
+        System.out.println("generate a nanoid which is url-friendly:");
+        System.out.println(NanoId.randomNanoId());
+
+        printSeparateLine();
+        NoArgGenerator v1Gen = Generators.timeBasedGenerator();
+        UUID v1 = v1Gen.generate();
         System.out.println("timeBasedGenerator:");
+        System.out.println(v1Gen.getType());
         System.out.println("UUID Version 1: " + v1);
         System.out.println(v1.timestamp());
 
-        System.out.println("=======================================");
+        printSeparateLine();
         System.out.println("timeBasedReorderedGenerator:");
-        UUID v6 = Generators.timeBasedReorderedGenerator().generate();
+        NoArgGenerator v6Gen = Generators.timeBasedReorderedGenerator();
+        System.out.println(v6Gen.getType());
+        UUID v6 = v6Gen.generate();
         System.out.println("UUID Version 6: " + v6);
 
-        System.out.println("=======================================");
+        printSeparateLine();
         System.out.println("timeBasedEpochGenerator:");
-        UUID v7 = Generators.timeBasedEpochGenerator().generate();
+        NoArgGenerator v7Gen = Generators.timeBasedEpochGenerator();
+        System.out.println(v7Gen.getType());
+        UUID v7 = v7Gen.generate();
         System.out.println("UUID Version 7: " + v7);
     }
 }

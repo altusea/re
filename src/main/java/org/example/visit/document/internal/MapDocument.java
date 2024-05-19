@@ -242,9 +242,9 @@ public final class MapDocument implements Document {
             return "{}";
         }
         StringBuilder output = new StringBuilder();
-        output.append("{");
+        output.append('{');
         value.forEach((k, v) -> output.append("\"").append(k).append("\": ")
-                .append(v.toString()).append(","));
+                .append(v.toString()).append(','));
         output.setCharAt(output.length() - 1, '}');
         return output.toString();
     }

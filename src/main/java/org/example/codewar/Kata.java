@@ -97,7 +97,7 @@ public class Kata {
                 StringBuilder reversedWord = new StringBuilder(word);
                 word = reversedWord.reverse().toString();
             }
-            result.append(word).append(" ");
+            result.append(word).append(' ');
         }
 
         return result.toString().trim();
