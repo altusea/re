@@ -7,6 +7,28 @@ import java.util.stream.IntStream;
 
 public class Kata {
 
+    public static Object[] removeEveryOther(Object[] arr) {
+        int n = arr.length;
+        Object[] newArr = new Object[(n + 1) / 2];
+        for (int i = 0; i < n; i += 2) {
+            newArr[i / 2] = arr[i];
+        }
+        return newArr;
+    }
+
+    public static long sumMul(int n, int m) {
+        if (n <= 0 || m <= n) {
+            throw new IllegalArgumentException();
+        }
+        long res = 0;
+        int acc = n;
+        while (acc < m) {
+            res += acc;
+            acc += n;
+        }
+        return res;
+    }
+
     public static String shortcut(String input) {
         StringBuilder sb = new StringBuilder();
         Set<Character> set = Set.of('a', 'e', 'i', 'o', 'u');
