@@ -1,5 +1,3 @@
 # re
 
-playground
-
-java code snippets & solutions
+> Java language playground

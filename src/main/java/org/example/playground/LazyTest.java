@@ -1,5 +1,6 @@
 package org.example.playground;
 
+import kala.value.LateInitValue;
 import kala.value.LazyValue;
 
 public class LazyTest {
@@ -11,5 +12,10 @@ public class LazyTest {
         System.out.println(lazyValue.get());
         System.out.println(lazyValue.get().contains("windows"));
         System.out.println(lazyValue.isReady());
+
+        LateInitValue<String> lateInitValue = new LateInitValue<>();
+        System.out.println(lateInitValue.isInitialized());
+        lateInitValue.initialize("sss");
+        System.out.println(lateInitValue.isInitialized());
     }
 }
