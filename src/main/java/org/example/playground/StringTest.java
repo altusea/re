@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.example.playground.CommonTest.printSeparateLine;
+import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class StringTest {
 

@@ -8,7 +8,7 @@ import it.unimi.dsi.fastutil.longs.LongStack;
 
 import java.util.Objects;
 
-import static org.example.playground.CommonTest.printSeparateLine;
+import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class FastTest {
 

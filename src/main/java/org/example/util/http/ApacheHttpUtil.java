@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.Map;
 
-import static org.example.playground.CommonTest.printSeparateLine;
+import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class ApacheHttpUtil {
 

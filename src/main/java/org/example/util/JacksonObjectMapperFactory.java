@@ -14,7 +14,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.YearMonthSerializer;
-import org.example.playground.TimeHolder;
+import org.example.playground.serde.TimeHolder;
 import org.example.util.internal.jackson.CustomLocalDateTimeDeserializer;
 
 import java.time.LocalDate;

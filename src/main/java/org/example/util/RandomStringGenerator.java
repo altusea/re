@@ -6,7 +6,7 @@ import java.security.SecureRandom;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.example.playground.CommonTest.printSeparateLine;
+import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class RandomStringGenerator {
 

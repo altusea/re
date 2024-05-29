@@ -7,6 +7,8 @@ import kala.collection.mutable.*;
 import kala.control.Either;
 import kala.control.Result;
 import kala.control.Try;
+import kala.value.LateInitValue;
+import kala.value.LazyValue;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.function.Function;
@@ -31,6 +33,9 @@ public class KalaCommonTest {
         lengthMap.put("b", 2);
         lengthMap.putIfAbsent("b", 3);
         System.out.println(lengthMap.size());
+        System.out.println(lengthMap.getOption("a"));
+        System.out.println(lengthMap.getOrDefault("b", -1));
+        System.out.println(lengthMap.getOrElse("c", () -> 100));
 
         System.out.println("\n=====> ImmutableMap");
         MutableList<String> stringMutableList = MutableList.of("hello", "world", "i", "wanna", "say");
@@ -69,5 +74,17 @@ public class KalaCommonTest {
         System.out.println("\n=====> Immutable Vectors");
         ImmutableVector<String> immutableVector = ImmutableVector.fill(5, "String");
         System.out.println(immutableVector.size());
+
+        System.out.println("\n=====> Lazy");
+        LazyValue<String> lazyValue = LazyValue.of(() -> System.getProperty("os.name").toLowerCase());
+        System.out.println(lazyValue.isReady());
+        System.out.println(lazyValue.get());
+        System.out.println(lazyValue.get().contains("windows"));
+        System.out.println(lazyValue.isReady());
+
+        LateInitValue<String> lateInitValue = new LateInitValue<>();
+        System.out.println(lateInitValue.isInitialized());
+        lateInitValue.initialize("sss");
+        System.out.println(lateInitValue.isInitialized());
     }
 }

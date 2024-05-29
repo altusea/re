@@ -6,7 +6,7 @@ import com.fasterxml.uuid.NoArgGenerator;
 
 import java.util.UUID;
 
-import static org.example.playground.CommonTest.printSeparateLine;
+import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class UUIDTest {
 

@@ -7,7 +7,7 @@ import java.util.EnumSet;
 import java.util.Map;
 import java.util.Set;
 
-import static org.example.playground.CommonTest.printSeparateLine;
+import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class EnumTest {
 
