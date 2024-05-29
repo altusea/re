@@ -26,9 +26,9 @@ public class StreamTest {
     }
 
     record Employee(String firstName,
-                           String lastName,
-                           String position,
-                           int salary) {
+                    String lastName,
+                    String position,
+                    int salary) {
     }
 
     @Test

@@ -1,8 +1,6 @@
 package org.example.playground;
 
-import cn.hutool.core.net.url.UrlBuilder;
 import cn.hutool.core.util.StrUtil;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,22 +9,7 @@ import static org.example.playground.CommonTest.printSeparateLine;
 
 public class StringTest {
 
-    public static String stripAnchor(final String s) {
-        int anchorIndex = StringUtils.indexOf(s, '#');
-        if (anchorIndex != StringUtils.INDEX_NOT_FOUND) {
-            return s.substring(0, anchorIndex);
-        }
-        return s;
-    }
-
     public static void main(String[] args) {
-        UrlBuilder urlBuilder = UrlBuilder.of("https://www.baidu.com?query=hello");
-        urlBuilder.setFragment("/login");
-        String test = urlBuilder.build();
-        System.out.println(test);
-        System.out.println(stripAnchor(test));
-        System.out.println(stripAnchor("https://www.baidu.com/#/login?query=hello"));
-
         printSeparateLine();
         String a = "hello about 中国 西方 二分 earth all.";
         System.out.println("raw length: " + a.length());

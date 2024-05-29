@@ -17,6 +17,13 @@ public sealed interface Result {
         }
         return new Success(result);
     }
+
+    default int getOrDefault(int defaultValue) {
+        if (this instanceof Success success) {
+            return success.num();
+        }
+        return defaultValue;
+    }
 }
 
 record Success(int num) implements Result {
@@ -29,7 +36,10 @@ class ResultTest {
     public static void main(String[] args) {
         Result r = Result.parseInt("Hello World");
         System.out.println(r);
+        System.out.println(r.getOrDefault(-1));
+
         Result r1 = Result.parseInt("1234567890");
         System.out.println(r1);
+        System.out.println(r1.getOrDefault(-1));
     }
 }

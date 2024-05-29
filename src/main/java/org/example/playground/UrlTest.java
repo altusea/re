@@ -4,6 +4,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.net.url.UrlBuilder;
 import cn.hutool.core.net.url.UrlQuery;
 import cn.hutool.core.util.URLUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.example.util.HttpUtils;
 
 import java.net.URLEncoder;
@@ -13,6 +14,14 @@ import java.util.Map;
 import static org.example.playground.CommonTest.printSeparateLine;
 
 public class UrlTest {
+
+    public static String stripAnchor(final String s) {
+        int anchorIndex = StringUtils.indexOf(s, '#');
+        if (anchorIndex != StringUtils.INDEX_NOT_FOUND) {
+            return s.substring(0, anchorIndex);
+        }
+        return s;
+    }
 
     public static void main(String[] args) {
         System.out.println(Convert.toStr("测试"));
@@ -25,20 +34,17 @@ public class UrlTest {
         urlQuery.add("a", "zzz");
         System.out.println(urlQuery.build(StandardCharsets.UTF_8));
 
-        Map<String, String> parmas = Map.of("a", "a", "b", "测试");
-        System.out.println(UrlQuery.of(parmas).build(StandardCharsets.UTF_8));
+        Map<String, String> params = Map.of("a", "a", "b", "测试");
+        System.out.println(UrlQuery.of(params).build(StandardCharsets.UTF_8));
 
-
-        System.out.println("test anchor:");
+        printSeparateLine("test anchor:");
         String anchorUrl = UrlBuilder.of("https://www.baidu.com#toc")
                 .addQuery("key1", "a")
                 .addQuery("key2", "b")
                 .build();
         System.out.println(anchorUrl);
 
-        printSeparateLine();
-
-        System.out.println("test anchor 2:");
+        printSeparateLine("test anchor 2:");
         String anchorUrl2 = UrlBuilder.of("https://www.baidu.com#toc")
                 .addQuery("key1", "a")
                 .addQuery("key2", "b")
@@ -47,7 +53,6 @@ public class UrlTest {
         System.out.println(anchorUrl2);
 
         printSeparateLine();
-
         UrlBuilder urlBuilder = UrlBuilder.of("https://www.google.com", StandardCharsets.UTF_8);
         urlBuilder.addPath("/path1/path2");
         urlBuilder.addPathSegment("path3");
@@ -69,5 +74,13 @@ public class UrlTest {
         System.out.println("net:       " + URLEncoder.encode(url2, StandardCharsets.UTF_8));
         System.out.println("hutool:    " + URLUtil.encode(url2));
         System.out.println("HttpUtils: " + HttpUtils.urlEncode(url2));
+
+        printSeparateLine();
+        UrlBuilder urlBuilder3 = UrlBuilder.of("https://www.baidu.com?query=hello");
+        urlBuilder3.setFragment("/login");
+        String test = urlBuilder3.build();
+        System.out.println(test);
+        System.out.println(stripAnchor(test));
+        System.out.println(stripAnchor("https://www.baidu.com/#/login?query=hello"));
     }
 }
