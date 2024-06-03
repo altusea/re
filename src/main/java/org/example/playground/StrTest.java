@@ -1,13 +1,13 @@
 package org.example.playground;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutool.core.text.StrUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.example.util.ConsoleUtil.printSeparateLine;
 
-public class StringTest {
+public class StrTest {
 
     public static void main(String[] args) {
         printSeparateLine();

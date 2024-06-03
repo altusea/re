@@ -1,10 +1,10 @@
 package org.example.playground.codec;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.net.url.UrlBuilder;
-import cn.hutool.core.net.url.UrlQuery;
-import cn.hutool.core.util.URLUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.net.url.UrlBuilder;
+import org.dromara.hutool.core.net.url.UrlEncoder;
+import org.dromara.hutool.core.net.url.UrlQuery;
 import org.example.util.HttpUtils;
 
 import java.net.URLEncoder;
@@ -28,7 +28,7 @@ public class UrlTest {
         System.out.println(URLEncoder.encode("测试", StandardCharsets.UTF_8));
         System.out.println(URLEncoder.encode("hello", StandardCharsets.UTF_8));
 
-        UrlQuery urlQuery = new UrlQuery();
+        UrlQuery urlQuery = UrlQuery.of(UrlQuery.EncodeMode.STRICT);
         urlQuery.add("a", "xxx");
         urlQuery.add("b", "yyy");
         urlQuery.add("a", "zzz");
@@ -65,14 +65,14 @@ public class UrlTest {
         urlBuilder1.addQuery("pageSize", 10);
         String url = urlBuilder1.build();
         System.out.println(url);
-        System.out.println(URLUtil.encode(url, StandardCharsets.UTF_8));
+        System.out.println(UrlEncoder.encodeAll(url, StandardCharsets.UTF_8));
 
         System.out.println(URLEncoder.encode(url, StandardCharsets.UTF_8));
 
         printSeparateLine();
         String url2 = "https://www.google.com?query=todo&timezone=taipei+qwe";
         System.out.println("net:       " + URLEncoder.encode(url2, StandardCharsets.UTF_8));
-        System.out.println("hutool:    " + URLUtil.encode(url2));
+        System.out.println("hutool:    " + UrlEncoder.encodeAll(url2));
         System.out.println("HttpUtils: " + HttpUtils.urlEncode(url2));
 
         printSeparateLine();

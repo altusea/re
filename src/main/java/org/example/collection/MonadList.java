@@ -8,6 +8,12 @@ public final class MonadList {
 
     static class Monad<T> {
 
+        private final List<T> list;
+
+        private Monad(List<T> aList) {
+            list = new ArrayList<>(aList);
+        }
+
         public static <T> Monad<T> unit(List<T> aList) {
             return new Monad<>(aList);
         }
@@ -19,12 +25,6 @@ public final class MonadList {
         public List<T> getValue() {
             return list;
         }
-
-        private Monad(List<T> aList) {
-            list = new ArrayList<>(aList);
-        }
-
-        private final List<T> list;
 
     }
 

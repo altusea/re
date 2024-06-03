@@ -1,20 +1,24 @@
 package org.example.playground;
 
-import cn.hutool.core.date.LocalDateTimeUtil;
+import org.dromara.hutool.core.date.TimeUtil;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class TimeTest {
 
     public static void main(String[] args) {
+        String s = DateTimeFormatter.ofPattern("B").format(LocalDateTime.now());
+        System.out.println(s);
+
         System.out.println("==================== hutool test ====================");
         long thirtyMinutes = 30 * 60 * 1000;
         long timestampNow = System.currentTimeMillis();
         long timestampThirtyMinutesLater = timestampNow + thirtyMinutes;
 
-        System.out.println(LocalDateTimeUtil.of(timestampNow));
-        System.out.println(LocalDateTimeUtil.of(timestampThirtyMinutesLater));
+        System.out.println(TimeUtil.of(timestampNow));
+        System.out.println(TimeUtil.of(timestampThirtyMinutesLater));
 
         System.out.println("\n==================== java build-in time classes ====================");
         LocalTime localTime = LocalTime.now();
@@ -32,7 +36,7 @@ public class TimeTest {
         System.out.println("ZonedDateTime.now(): " + zonedDateTime + " with zone " + zonedDateTime.getZone());
 
         System.out.println("\n==================== other test ====================");
-        LocalDateTime fromDate = LocalDateTimeUtil.of(new Date());
+        LocalDateTime fromDate = TimeUtil.of(new Date());
         System.out.println(fromDate);
 
         System.out.println("\n==================== YearMonth test ====================");

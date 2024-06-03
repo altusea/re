@@ -1,8 +1,8 @@
 package org.example.playground;
 
-import cn.hutool.core.lang.id.NanoId;
 import com.fasterxml.uuid.Generators;
 import com.fasterxml.uuid.NoArgGenerator;
+import org.dromara.hutool.core.data.id.NanoId;
 
 import java.util.UUID;
 
