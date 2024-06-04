@@ -21,7 +21,8 @@ public class StreamTest {
 
     @Test
     public void test2() {
-        assertThrows(NullPointerException.class, () -> Stream.of(null, "Green", "Yellow").toList());
+        assertThrows(NullPointerException.class,
+                () -> Stream.of(null, "Green", "Yellow").collect(Collectors.toUnmodifiableList()));
     }
 
     record Employee(String firstName,
