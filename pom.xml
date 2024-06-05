@@ -185,6 +185,12 @@
             <artifactId>jackson-dataformat-csv</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.japplis</groupId>
+            <artifactId>virtually</artifactId>
+            <version>0.1</version>
+        </dependency>
+
         <!-- logback -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
