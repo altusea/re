@@ -5,6 +5,7 @@ import kala.collection.immutable.ImmutableMap;
 import kala.collection.immutable.ImmutableVector;
 import kala.collection.mutable.*;
 import kala.control.Either;
+import kala.control.Option;
 import kala.control.Result;
 import kala.control.Try;
 import kala.value.LateInitValue;
@@ -17,8 +18,16 @@ import java.util.stream.Collectors;
 public class KalaCommonTest {
 
     public static void main(String[] args) {
+        System.out.println("=====> Option");
+        Option<String> optionA = Option.some(null);
+        System.out.println(optionA);
+        Option<String> optionB = Option.some("hello");
+        System.out.println(optionB);
+        Option<String> optionC = Option.none();
+        System.out.println(optionC);
+
         System.out.println("=====> Either");
-        Either<String, Integer> either = Either.left("error msg");
+        Either<String, ?> either = Either.left("error msg");
         System.out.println(either.isLeft());
         System.out.println(either.isRight());
         System.out.println(either.toResult());
@@ -29,17 +38,19 @@ public class KalaCommonTest {
 
         System.out.println("\n=====> MutableMap");
         MutableMap<String, Integer> lengthMap = new MutableHashMap<>();
-        lengthMap.put("a", 1);
         lengthMap.put("b", 2);
+        lengthMap.put("c", null);
         lengthMap.putIfAbsent("b", 3);
         System.out.println(lengthMap.size());
-        System.out.println(lengthMap.getOption("a"));
+        System.out.println(lengthMap.getOption("b"));
+        System.out.println(lengthMap.getOption("c"));
+        System.out.println(lengthMap.getOption("d"));
         System.out.println(lengthMap.getOrDefault("b", -1));
-        System.out.println(lengthMap.getOrElse("c", () -> 100));
+        System.out.println(lengthMap.getOrElse("e", () -> 100));
 
         System.out.println("\n=====> ImmutableMap");
-        MutableList<String> stringMutableList = MutableList.of("hello", "world", "i", "wanna", "say");
-        ImmutableMap<String, Integer> immutableMap = stringMutableList.stream()
+        var stringList = ImmutableVector.of("hello", "world", "i", "wanna", "say");
+        var immutableMap = stringList.stream()
                 .collect(ImmutableMap.collector(Function.identity(), String::length));
         immutableMap.forEach((k, v) -> System.out.println(k + " : " + v));
 
