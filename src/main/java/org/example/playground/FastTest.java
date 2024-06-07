@@ -1,23 +1,22 @@
 package org.example.playground;
 
-import it.unimi.dsi.fastutil.Pair;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.longs.LongArrayList;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import it.unimi.dsi.fastutil.longs.LongSets;
 import it.unimi.dsi.fastutil.longs.LongStack;
-
-import java.util.Objects;
 
 import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class FastTest {
 
     public static void main(String[] args) {
-        Pair<Integer, Boolean> integerBooleanPair = Pair.of(2, true);
-        Pair<Integer, Boolean> integerBooleanPair2 = Pair.of(2, true);
-        System.out.println(integerBooleanPair);
-        System.out.println(Objects.equals(integerBooleanPair, integerBooleanPair2));
-        System.out.println(Objects.compare(integerBooleanPair, integerBooleanPair2, Pair.lexComparator()));
+        IntList a = new IntArrayList();
+        a.add(1);
+        a.add(2);
+        a.add(3);
+        System.out.println(a.getFirst());
 
         printSeparateLine();
         LongStack longStack = new LongArrayList();

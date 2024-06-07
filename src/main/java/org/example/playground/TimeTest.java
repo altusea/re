@@ -6,9 +6,17 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import static org.example.util.ConsoleUtil.printSeparateLine;
+
 public class TimeTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        Instant instant1 = Instant.now();
+        Thread.sleep(Duration.ofSeconds(1));
+        var instant2 = Instant.now();
+        System.out.println(instant1.isBefore(instant2));
+
+        printSeparateLine();
         String s = DateTimeFormatter.ofPattern("B").format(LocalDateTime.now());
         System.out.println(s);
 

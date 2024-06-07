@@ -9,7 +9,7 @@
     <version>2024.0.6</version>
 
     <properties>
-        <maven.compiler.release>23</maven.compiler.release>
+        <maven.compiler.release>22</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hutool.version>6.0.0-M13</hutool.version>
         <kala.version>0.74.0</kala.version>
@@ -21,7 +21,7 @@
         <jackson.version>2.17.1</jackson.version>
         <http-components.version>5.4-alpha2</http-components.version>
         <okhttp.version>5.0.0-alpha.14</okhttp.version>
-        <agrona.version>1.21.2</agrona.version>
+        <jctools.version>4.0.5</jctools.version>
         <pcollections.version>4.0.2</pcollections.version>
     </properties>
 
@@ -99,9 +99,9 @@
             <version>${pcollections.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.agrona</groupId>
-            <artifactId>agrona</artifactId>
-            <version>${agrona.version}</version>
+            <groupId>org.jctools</groupId>
+            <artifactId>jctools-core</artifactId>
+            <version>${jctools.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
