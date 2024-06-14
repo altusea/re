@@ -9,7 +9,7 @@
     <version>2024.0.6</version>
 
     <properties>
-        <maven.compiler.release>22</maven.compiler.release>
+        <maven.compiler.release>23</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hutool.version>6.0.0-M13</hutool.version>
         <kala.version>0.74.0</kala.version>
