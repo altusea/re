@@ -12,7 +12,7 @@ public class JavaTypeTest {
 
     public static void main(String[] args) {
         TypeFactory typeFactory1 = TypeFactory.defaultInstance();
-        TypeFactory typeFactory2 = JacksonObjectMapperFactory.create().getTypeFactory();
+        TypeFactory typeFactory2 = JacksonObjectMapperFactory.createJsonMapper().getTypeFactory();
         System.out.println("typeFactory1 == typeFactory2: " + (typeFactory1 == typeFactory2));
 
         JavaType javaType = typeFactory1.constructParametricType(List.class, String.class);

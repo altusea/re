@@ -28,7 +28,7 @@ public class DefaultTimeModuleTest {
         JsonNode jsonNode = defaultObjectMapper.readTree(jsonStr);
         System.out.println(jsonNode.get("localDateTime").getNodeType());
 
-        ObjectMapper objectMapper = JacksonObjectMapperFactory.create();
+        ObjectMapper objectMapper = JacksonObjectMapperFactory.createJsonMapper();
         String jsonStr1 = objectMapper.writeValueAsString(timeHolder1);
         System.out.println("[1] " + jsonStr1);
         JsonNode jsonNode1 = objectMapper.readTree(jsonStr1);

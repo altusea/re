@@ -2,7 +2,7 @@ package org.example.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -13,33 +13,33 @@ import static org.example.util.FunctionalUtils.invokeSafely;
 
 public class JacksonUtil {
 
-    private static final ObjectMapper OBJECT_MAPPER;
+    private static final JsonMapper JSON_MAPPER;
 
     static {
-        OBJECT_MAPPER = JacksonObjectMapperFactory.create();
+        JSON_MAPPER = JacksonObjectMapperFactory.createJsonMapper();
     }
 
     public static String toJson(Object value) {
-        return invokeSafely(() -> OBJECT_MAPPER.writeValueAsString(value));
+        return invokeSafely(() -> JSON_MAPPER.writeValueAsString(value));
     }
 
     public static <T> T fromJson(String content, Class<T> valueType) {
-        return invokeSafely(() -> OBJECT_MAPPER.readValue(content, valueType));
+        return invokeSafely(() -> JSON_MAPPER.readValue(content, valueType));
     }
 
     public static <T> T fromJson(String content, TypeReference<T> valueTypeRef) {
-        return invokeSafely(() -> OBJECT_MAPPER.readValue(content, valueTypeRef));
+        return invokeSafely(() -> JSON_MAPPER.readValue(content, valueTypeRef));
     }
 
     public static <T> T fromJson(String content, JavaType valueType) {
-        return invokeSafely(() -> OBJECT_MAPPER.readValue(content, valueType));
+        return invokeSafely(() -> JSON_MAPPER.readValue(content, valueType));
     }
 
     public static JavaType buildJavaTypeLinearly(Class<?>... classes) {
         if (ArrayUtils.isEmpty(classes)) {
             return null;
         }
-        TypeFactory typeFactory = OBJECT_MAPPER.getTypeFactory();
+        TypeFactory typeFactory = JSON_MAPPER.getTypeFactory();
         int n = classes.length;
         if (n == 1) {
             return typeFactory.constructType(classes[0]);
@@ -62,7 +62,7 @@ public class JacksonUtil {
         System.out.println(buildJavaTypeLinearly(List.class, Integer.class));
         System.out.println(buildJavaTypeLinearly(List.class, List.class, String.class));
 
-        TypeFactory typeFactory = OBJECT_MAPPER.getTypeFactory();
+        TypeFactory typeFactory = JSON_MAPPER.getTypeFactory();
         System.out.println(typeFactory.constructMapType(Map.class, String.class, Integer.class));
     }
 }

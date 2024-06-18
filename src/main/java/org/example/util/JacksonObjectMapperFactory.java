@@ -3,8 +3,8 @@ package org.example.util;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
@@ -27,7 +27,7 @@ public final class JacksonObjectMapperFactory {
     private JacksonObjectMapperFactory() {
     }
 
-    public static ObjectMapper create() {
+    public static JsonMapper createJsonMapper() {
         JavaTimeModule javaTimeModule = new JavaTimeModule();
         // LocalDate
         javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(DatePattern.NORM_DATE_FORMATTER));
@@ -41,13 +41,14 @@ public final class JacksonObjectMapperFactory {
         // YearMonth
         javaTimeModule.addSerializer(YearMonth.class, new YearMonthSerializer(DatePattern.NORM_MONTH_FORMATTER));
         javaTimeModule.addDeserializer(YearMonth.class, new YearMonthDeserializer(DatePattern.NORM_MONTH_FORMATTER));
-        return new ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+        return JsonMapper.builder()
                 .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
                 // empty string error
                 .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
-                .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                .registerModule(javaTimeModule);
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .serializationInclusion(JsonInclude.Include.NON_NULL)
+                .addModule(javaTimeModule)
+                .build();
     }
 
     public static void main(String[] args) throws JsonProcessingException {
@@ -56,7 +57,7 @@ public final class JacksonObjectMapperFactory {
         timeHolder.setLocalDate(LocalDate.now());
         timeHolder.setLocalDateTime(LocalDateTime.now());
         System.out.println(timeHolder);
-        System.out.println(JacksonObjectMapperFactory.create().writeValueAsString(timeHolder));
+        System.out.println(JacksonObjectMapperFactory.createJsonMapper().writeValueAsString(timeHolder));
     }
 
 }

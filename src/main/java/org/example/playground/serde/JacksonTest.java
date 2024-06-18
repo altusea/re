@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class JacksonTest {
 
     public static void main(String[] args) throws JsonProcessingException {
-        ObjectMapper objectMapper = JacksonObjectMapperFactory.create();
+        ObjectMapper objectMapper = JacksonObjectMapperFactory.createJsonMapper();
 
         TimeHolder clazz = new TimeHolder();
         clazz.setLocalDate(LocalDate.now());
