@@ -9,6 +9,7 @@ import org.example.util.HttpUtils;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Map;
 
 import static org.example.util.ConsoleUtil.printSeparateLine;
@@ -24,6 +25,16 @@ public class UrlTest {
     }
 
     public static void main(String[] args) {
+        var a = "测试一下子啊a";
+        var b = a.getBytes(StandardCharsets.UTF_8);
+        var c = UrlBuilder.of("www.baidu.com")
+                .addQuery("info", Base64.getUrlEncoder().encodeToString(b))
+                .addQuery("another", 1)
+                .build();
+        var d = UrlBuilder.of(c);
+        System.out.println(d.getQuery().getQueryMap().get("info"));
+
+        printSeparateLine();
         System.out.println(Convert.toStr("测试"));
         System.out.println(URLEncoder.encode("测试", StandardCharsets.UTF_8));
         System.out.println(URLEncoder.encode("hello", StandardCharsets.UTF_8));

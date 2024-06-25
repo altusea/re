@@ -3,14 +3,10 @@ package org.example.playground.stream;
 import kala.comparator.Comparators;
 
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.SequencedMap;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Gatherer;
 import java.util.stream.Gatherers;
 import java.util.stream.Stream;
@@ -18,6 +14,19 @@ import java.util.stream.Stream;
 public class GathererTest {
 
     record DateRecord(String type, LocalDate date) {
+    }
+
+    public static <T, K> Gatherer<T, ?, T> distinctBy(Function<? super T, ? extends K> distinctByExtractor) {
+        Supplier<Set<K>> initializer = HashSet::new;
+        Gatherer.Integrator<Set<K>, T, T> integrator = (state, element, downstream) -> {
+            K key = distinctByExtractor.apply(element);
+            if (!state.contains(key)) {
+                state.add(key);
+                downstream.push(element);
+            }
+            return true;
+        };
+        return Gatherer.ofSequential(initializer, integrator);
     }
 
     public static <T, K, C> Gatherer<T, ?, T> groupAndFindMax(Function<? super T, ? extends K> keyExtractor,
@@ -45,6 +54,7 @@ public class GathererTest {
     }
 
     public static void main(String[] args) {
+        System.out.println("groupAndFindMax example: ");
         var listA = List.of(
                 new DateRecord("B", LocalDate.of(2024, 6, 2)),
                 new DateRecord("B", LocalDate.of(2024, 6, 3)), // desired
@@ -55,13 +65,16 @@ public class GathererTest {
                 new DateRecord("A", LocalDate.of(2024, 6, 3)),
                 new DateRecord("D", LocalDate.of(2023, 6, 4)) // desired
         );
-        var listB = listA.stream()
-                .gather(groupAndFindMax(DateRecord::type, DateRecord::date, Comparators.naturalOrder()))
-                .collect(Collectors.toUnmodifiableList());
+        var listB = listA.stream().gather(distinctBy(DateRecord::type)).toList();
         listB.forEach(System.out::println);
 
+        System.out.println("groupAndFindMax example: ");
+        var listC = listA.stream()
+                .gather(groupAndFindMax(DateRecord::type, DateRecord::date, Comparators.naturalOrder()))
+                .toList();
+        listC.forEach(System.out::println);
 
-        System.out.print("Fold example: ");
+        System.out.println("Fold example: ");
         Stream.of(1, 2, 3, 4, 5)
                 .gather(Gatherers.fold(() -> 1, (a, b) -> a * b))
                 .forEach(System.out::println);

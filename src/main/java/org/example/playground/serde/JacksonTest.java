@@ -10,8 +10,15 @@ import java.time.LocalDateTime;
 
 public class JacksonTest {
 
+    record TestRecord(String aField, String bField) {
+    }
+
     public static void main(String[] args) throws JsonProcessingException {
         ObjectMapper objectMapper = JacksonObjectMapperFactory.createJsonMapper();
+
+        var t1 = new TestRecord("t1", "t2");
+        var st1 = objectMapper.writeValueAsString(t1);
+        var t2 = objectMapper.readValue(st1, TestRecord.class);
 
         TimeHolder clazz = new TimeHolder();
         clazz.setLocalDate(LocalDate.now());

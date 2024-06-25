@@ -2,75 +2,60 @@ package org.example.playground;
 
 import org.apache.commons.lang3.EnumUtils;
 
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.Map;
-import java.util.Set;
-
-import static org.example.util.ConsoleUtil.printSeparateLine;
-
 public class EnumTest {
 
     enum Color {
 
-        RED("red"),
-        GREEN("green"),
-        BLUE("blue"),
-        ;
+        RED("RED", 255, 0, 0),
+        GREEN("GREEN", 0, 255, 0),
+        BLUE("BLUE", 0, 0, 255);
 
-        private final String code;
+        final String code;
 
-        Color(String code) {
+        final int r;
+
+        final int g;
+
+        final int b;
+
+        Color(String code, int r, int g, int b) {
             this.code = code;
+            this.r = r;
+            this.g = g;
+            this.b = b;
         }
 
         public String getCode() {
             return code;
         }
-    }
 
-    enum EmployeePosition {
-        SRE,
-        ARCHITECT,
-        DEVELOPER
+        public int getR() {
+            return r;
+        }
+
+        public int getG() {
+            return g;
+        }
+
+        public int getB() {
+            return b;
+        }
+
+        @Override
+        public String toString() {
+            return "Color[" +
+                    code +
+                    ", r=" + r +
+                    ", g=" + g +
+                    ", b=" + b +
+                    ']';
+        }
     }
 
     public static void main(String[] args) {
-        Map<String, Color> map = EnumUtils.getEnumMap(Color.class, Color::getCode);
-        System.out.println(map.get(Color.RED.code));
-
-        // with EnumSet
-        printSeparateLine();
-        var x = EnumSet.of(
-                EmployeePosition.SRE,
-                EmployeePosition.ARCHITECT,
-                EmployeePosition.DEVELOPER);
-        long begX = System.nanoTime();
-        for (int i = 0; i < 100_000_000; i++) {
-            var es = EnumSet.allOf(EmployeePosition.class);
-            es.containsAll(x);
-        }
-        long endX = System.nanoTime();
-        System.out.println(x.getClass() + ": " + (endX - begX) / 1e9);
-
-        // with Set
-        printSeparateLine();
-        var y = Set.of(
-                EmployeePosition.SRE,
-                EmployeePosition.ARCHITECT,
-                EmployeePosition.DEVELOPER);
-        long begY = System.nanoTime();
-        for (int i = 0; i < 100_000_000; i++) {
-            var hs = Set.of(EmployeePosition.values());
-            hs.containsAll(y);
-        }
-        long endY = System.nanoTime();
-        System.out.println(y.getClass() + ": " + (endY - begY) / 1e9);
-
-        EnumMap<EmployeePosition, Long> map2 = new EnumMap<>(EmployeePosition.class);
-        map2.put(EmployeePosition.SRE, 1L);
-        map2.put(EmployeePosition.ARCHITECT, 2L);
-        map2.put(EmployeePosition.DEVELOPER, 3L);
-        System.out.println(map2.containsKey(EmployeePosition.SRE));
+        var map = EnumUtils.getEnumMap(Color.class, Color::getCode);
+        System.out.println(map.size());
+        var red = map.get(Color.RED.code);
+        System.out.println(red);
     }
 }

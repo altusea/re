@@ -1,4 +1,4 @@
-package org.example.playground;
+package org.example.playground.b;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
