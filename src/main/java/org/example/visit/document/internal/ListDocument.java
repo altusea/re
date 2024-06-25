@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.toList;
 public final class ListDocument implements Document {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 42L;
 
     private final List<Document> value;
 

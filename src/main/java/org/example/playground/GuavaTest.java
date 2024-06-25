@@ -1,5 +1,7 @@
 package org.example.playground;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Range;
 import com.google.common.collect.RangeSet;
 import com.google.common.collect.TreeRangeSet;
@@ -7,6 +9,12 @@ import com.google.common.collect.TreeRangeSet;
 public class GuavaTest {
 
     public static void main(String[] args) {
+        Joiner joiner = Joiner.on("; ").skipNulls();
+        System.out.println(joiner.join("Harry", null, "Ron", "Hermione"));
+
+        System.out.println(Splitter.on(',').trimResults().omitEmptyStrings()
+                .split("foo,bar,,   qux"));
+
         RangeSet<Integer> rangeSet = TreeRangeSet.create();
         rangeSet.add(Range.closed(1, 10)); // {[1, 10]}
         System.out.println(rangeSet);

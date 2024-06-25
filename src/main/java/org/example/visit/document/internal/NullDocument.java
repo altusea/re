@@ -14,7 +14,7 @@ import java.util.Map;
 public final class NullDocument implements Document {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 42L;
 
     /**
      * Unwraps NullDocument as null.

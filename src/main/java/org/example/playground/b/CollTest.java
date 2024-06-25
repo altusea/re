@@ -1,15 +1,22 @@
 package org.example.playground.b;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.SequencedMap;
-import java.util.SequencedSet;
+import java.util.*;
 
 import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class CollTest {
 
     public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        list.add(1); // 0
+        list.add(2); // 1
+        list.add(3); // 2
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        list.remove(2);
+        System.out.println(list);
+
         printSeparateLine("test SequencedMap:");
         SequencedMap<String, Integer> map = new LinkedHashMap<>();
         map.putLast("A", 1);

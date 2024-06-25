@@ -16,7 +16,7 @@ import java.util.Objects;
 public final class StringDocument implements Document {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 42L;
 
     private final String value;
 
