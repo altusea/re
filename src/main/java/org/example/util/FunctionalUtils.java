@@ -6,11 +6,18 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public final class FunctionalUtils {
 
     private FunctionalUtils() {
+    }
+
+    public static <T> void ifTrue(T t, Predicate<T> predicate, Consumer<T> consumer) {
+        if (predicate.test(t)) {
+            consumer.accept(t);
+        }
     }
 
     /**
