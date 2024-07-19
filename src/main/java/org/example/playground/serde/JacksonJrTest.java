@@ -1,4 +1,4 @@
-package org.example.playground;
+package org.example.playground.serde;
 
 import com.fasterxml.jackson.jr.ob.JSON;
 import org.example.util.JacksonUtil;

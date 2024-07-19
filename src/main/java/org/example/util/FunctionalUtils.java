@@ -1,5 +1,8 @@
 package org.example.util;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.function.Consumers;
+import org.apache.commons.lang3.function.Suppliers;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -14,10 +17,20 @@ public final class FunctionalUtils {
     private FunctionalUtils() {
     }
 
-    public static <T> void ifTrue(T t, Predicate<T> predicate, Consumer<T> consumer) {
-        if (predicate.test(t)) {
-            consumer.accept(t);
+    public static <T> void ifTrue(final T object, final Predicate<T> predicate, final Consumer<T> consumer) {
+        if (predicate != null && predicate.test(object)) {
+            if (consumer != null) {
+                consumer.accept(object);
+            }
         }
+    }
+
+    public static void main(String[] args) {
+        Consumers.accept(Consumers.nop(), "hello");
+        Suppliers.get(null);
+        ifTrue(null, null, System.out::println);
+        ifTrue("hello", null, System.out::println);
+        ifTrue("hello", StringUtils::isNotBlank, System.out::println);
     }
 
     /**

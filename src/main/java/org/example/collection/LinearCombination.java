@@ -18,7 +18,7 @@ public class LinearCombination {
                 op = " + ";
             }
             int av = Math.abs(c[i]);
-            String coeff = av == 1 ? "" : "" + av + "*";
+            String coeff = av == 1 ? "" : av + "*";
             sb.append(op).append(coeff).append("e(").append(i + 1).append(')');
         }
         if (sb.isEmpty()) {
