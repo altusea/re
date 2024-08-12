@@ -1,12 +1,15 @@
 package org.example.playground.serde;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
+import org.example.util.ConsoleUtil;
 import org.example.util.JacksonObjectMapperFactory;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class JacksonTest {
 
@@ -16,6 +19,13 @@ public class JacksonTest {
     public static void main(String[] args) throws JsonProcessingException {
         ObjectMapper objectMapper = JacksonObjectMapperFactory.createJsonMapper();
 
+        Optional<String> stringOptional = Optional.of("hello");
+        var a = objectMapper.writeValueAsString(stringOptional);
+        var b = objectMapper.writeValueAsString(Optional.empty());
+        var c = objectMapper.readValue(a, new TypeReference<Optional<String>>() {});
+        var d = objectMapper.readValue(b, new TypeReference<Optional<String>>() {});
+
+        ConsoleUtil.printSeparateLine();
         var t1 = new TestRecord("t1", "t2");
         var st1 = objectMapper.writeValueAsString(t1);
         var t2 = objectMapper.readValue(st1, TestRecord.class);
