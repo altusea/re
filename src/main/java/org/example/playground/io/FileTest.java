@@ -14,7 +14,7 @@ import java.nio.file.Files;
 
 public class FileTest {
 
-    private static final Logger log = LoggerFactory.getLogger(ReversalGame.class);
+    private static final Logger log = LoggerFactory.getLogger(FileTest.class);
 
     public static void main(String[] args) {
         try {

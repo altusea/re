@@ -14,16 +14,16 @@
         <hutool.version>6.0.0-M15</hutool.version>
         <kala.version>0.74.0</kala.version>
         <slf4j.version>2.0.13</slf4j.version>
-        <logback.version>1.5.6</logback.version>
-        <guava.version>33.2.1-jre</guava.version>
+        <logback.version>1.5.7</logback.version>
+        <guava.version>33.3.0-jre</guava.version>
         <fastjson.version>2.0.52</fastjson.version>
         <gson.version>2.11.0</gson.version>
         <jackson.version>2.17.2</jackson.version>
         <http-components.version>5.4-beta1</http-components.version>
         <okhttp.version>5.0.0-alpha.14</okhttp.version>
         <jctools.version>4.0.5</jctools.version>
-        <pcollections.version>4.0.2</pcollections.version>
         <easyexcel.version>4.0.2</easyexcel.version>
+        <eclipse-collections.version>12.0.0.M3</eclipse-collections.version>
     </properties>
 
     <dependencyManagement>
@@ -38,7 +38,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.11.0-RC1</version>
+                <version>5.11.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -117,8 +117,19 @@
         </dependency>
         <dependency>
             <groupId>it.unimi.dsi</groupId>
-            <artifactId>fastutil-core</artifactId>
+            <artifactId>fastutil</artifactId>
             <version>8.5.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.collections</groupId>
+            <artifactId>eclipse-collections-api</artifactId>
+            <version>${eclipse-collections.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.collections</groupId>
+            <artifactId>eclipse-collections</artifactId>
+            <version>${eclipse-collections.version}</version>
         </dependency>
         <dependency>
             <groupId>org.agrona</groupId>

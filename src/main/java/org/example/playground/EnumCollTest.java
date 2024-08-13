@@ -48,7 +48,7 @@ public class EnumCollTest {
         long begX = System.nanoTime();
         for (int i = 0; i < 100_000_000; i++) {
             var es = EnumSet.allOf(EmployeePosition.class);
-            es.containsAll(x);
+            var _ = es.containsAll(x);
         }
         long endX = System.nanoTime();
         System.out.println(x.getClass() + ": " + (endX - begX) / 1e9);
@@ -62,7 +62,7 @@ public class EnumCollTest {
         long begY = System.nanoTime();
         for (int i = 0; i < 100_000_000; i++) {
             var hs = Set.of(EmployeePosition.values());
-            hs.containsAll(y);
+            var _ = hs.containsAll(y);
         }
         long endY = System.nanoTime();
         System.out.println(y.getClass() + ": " + (endY - begY) / 1e9);

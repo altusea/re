@@ -22,10 +22,13 @@ public class IdGeneratorFactory {
         System.out.println(uuid.toString());
         System.out.println(uuid.timestamp());
 
+        ConsoleUtil.printSeparateLine("test Snowflake:");
         var snowflake = new Snowflake(IdConstants.DEFAULT_WORKER_ID, IdConstants.DEFAULT_DATACENTER_ID, true);
+        System.out.println(snowflake.nextStr());
         System.out.println(snowflake.next());
-        System.out.println(snowflake.next());
-
+        System.out.println("compare: " + snowflake.next());
+        System.out.println("compare: " + Long.MAX_VALUE);
+        ConsoleUtil.printSeparateLine();
         System.out.println(IdUtil.fastSimpleUUID());
         System.out.println(IdUtil.simpleUUID());
     }
