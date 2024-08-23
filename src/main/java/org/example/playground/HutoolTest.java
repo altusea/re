@@ -2,6 +2,11 @@ package org.example.playground;
 
 import org.dromara.hutool.core.data.IdcardUtil;
 import org.dromara.hutool.core.data.MaskingUtil;
+import org.dromara.hutool.core.date.DateUtil;
+import org.dromara.hutool.core.date.TimeUtil;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class HutoolTest {
 
@@ -12,5 +17,13 @@ public class HutoolTest {
         System.out.println(MaskingUtil.chineseName("张北海"));
         System.out.println(IdcardUtil.isValidCard18("140214200009093140"));
 
+        Date date = new Date();
+        System.out.println(DateUtil.beginOfDay(date));
+        System.out.println(DateUtil.endOfDay(date, false).millisecond());
+        System.out.println(DateUtil.endOfDay(date, true).millisecond());
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(TimeUtil.toEpochMilli(TimeUtil.endOfDay(localDateTime, false)));
+        System.out.println(TimeUtil.toEpochMilli(TimeUtil.endOfDay(localDateTime, true)));
     }
 }

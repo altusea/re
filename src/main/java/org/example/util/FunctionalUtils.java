@@ -30,7 +30,7 @@ public final class FunctionalUtils {
         Suppliers.get(null);
         ifTrue(null, null, System.out::println);
         ifTrue("hello", null, System.out::println);
-        ifTrue("hello", StringUtils::isNotBlank, System.out::println);
+        ifTrue("hello", StringUtils::isNotBlank, e -> System.out.printf("if true then print \"%s\".", e));
     }
 
     /**
