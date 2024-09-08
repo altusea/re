@@ -1,7 +1,7 @@
 package org.example.playground.codec;
 
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.convert.ConvertUtil;
 import org.dromara.hutool.core.net.url.UrlBuilder;
 import org.dromara.hutool.core.net.url.UrlEncoder;
 import org.dromara.hutool.core.net.url.UrlQuery;
@@ -35,7 +35,7 @@ public class UrlTest {
         System.out.println(d.getQuery().getQueryMap().get("info"));
 
         printSeparateLine();
-        System.out.println(Convert.toStr("测试"));
+        System.out.println(ConvertUtil.toStr("测试"));
         System.out.println(URLEncoder.encode("测试", StandardCharsets.UTF_8));
         System.out.println(URLEncoder.encode("hello", StandardCharsets.UTF_8));
 

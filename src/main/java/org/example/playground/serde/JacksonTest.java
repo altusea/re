@@ -22,8 +22,10 @@ public class JacksonTest {
         Optional<String> stringOptional = Optional.of("hello");
         var a = objectMapper.writeValueAsString(stringOptional);
         var b = objectMapper.writeValueAsString(Optional.empty());
-        var c = objectMapper.readValue(a, new TypeReference<Optional<String>>() {});
-        var d = objectMapper.readValue(b, new TypeReference<Optional<String>>() {});
+        var c = objectMapper.readValue(a, new TypeReference<Optional<String>>() {
+        });
+        var d = objectMapper.readValue(b, new TypeReference<Optional<String>>() {
+        });
 
         ConsoleUtil.printSeparateLine();
         var t1 = new TestRecord("t1", "t2");

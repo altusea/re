@@ -1,11 +1,14 @@
 package org.example.playground;
 
 import kala.range.primitive.IntRange;
+import org.apache.commons.lang3.ArrayFill;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.function.Consumers;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.commons.lang3.time.StopWatch;
+import org.example.util.ConsoleUtil;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -24,17 +27,21 @@ public class CommonsLangTest {
         printSeparateLine();
         Consumer<String> consumer = Consumers.nop();
         consumer.accept("hello");
-
+        System.out.println("here something ha");
         printSeparateLine();
         var l = new ArrayList<String>();
-        IntRange.closedOpen(0, 10).forEach(_ -> {
-            l.add(RandomStringUtils.randomNumeric(6));
-        });
+        IntRange.closedOpen(0, 10).forEach(_ -> l.add(RandomStringUtils.insecure().nextNumeric(6)));
         System.out.println(StringUtils.join(l, ", "));
 
         var stopWatch = StopWatch.createStarted();
         Thread.sleep(Duration.ofSeconds(5));
         stopWatch.stop();
         System.out.println(stopWatch.formatTime());
+
+        ConsoleUtil.printSeparateLine();
+        int[] a = new int[]{1, 2, 3};
+        var i = ArrayUtils.indexOf(a, 2);
+        var b = new long[10];
+        ArrayFill.fill(b, 1000L);
     }
 }

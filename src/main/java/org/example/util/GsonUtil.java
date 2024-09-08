@@ -3,10 +3,10 @@ package org.example.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import org.example.util.internal.gson.DateTypeAdapter;
-import org.example.util.internal.gson.LocalDateTimeTypeAdapter;
-import org.example.util.internal.gson.LocalDateTypeAdapter;
-import org.example.util.internal.gson.YearMonthTypeAdapter;
+import org.example.util.internal.gson.*;
+
+import java.util.List;
+import java.util.Optional;
 
 public class GsonUtil {
 
@@ -17,7 +17,8 @@ public class GsonUtil {
                 .registerTypeAdapterFactory(DateTypeAdapter.FACTORY)
                 .registerTypeAdapterFactory(LocalDateTypeAdapter.FACTORY)
                 .registerTypeAdapterFactory(LocalDateTimeTypeAdapter.FACTORY)
-                .registerTypeAdapterFactory(YearMonthTypeAdapter.FACTORY);
+                .registerTypeAdapterFactory(YearMonthTypeAdapter.FACTORY)
+                .registerTypeAdapterFactory(OptionalTypeAdapter.factory());
         gson = builder.create();
     }
 
@@ -33,4 +34,25 @@ public class GsonUtil {
         return gson.toJson(obj);
     }
 
+    public static void main(String[] args) {
+        Optional<String> a = Optional.of("a");
+        Optional<String> b = Optional.empty();
+        Optional<List<String>> c = Optional.of(List.of("a", "b", "c"));
+        Optional<String> d = null;
+        System.out.println(GsonUtil.toJson(a));
+        System.out.println(GsonUtil.toJson(b));
+        System.out.println(GsonUtil.toJson(c));
+        System.out.println(GsonUtil.toJson(d));
+
+        ConsoleUtil.printSeparateLine();
+        System.out.println(GsonUtil.fromJson("[\"a\"]", new TypeToken<Optional<String>>() {
+        }));
+        System.out.println(GsonUtil.fromJson("[]", new TypeToken<Optional<String>>() {
+        }));
+        System.out.println(GsonUtil.fromJson("[[\"a\",\"b\",\"c\"]]", new TypeToken<Optional<List<String>>>() {
+        }));
+        System.out.println(GsonUtil.fromJson("null", new TypeToken<Optional<String>>() {
+        }));
+
+    }
 }

@@ -25,7 +25,7 @@ public class StreamUtil {
     @Unmodifiable
     @Contract(pure = true)
     public static <T, R> List<R> mapAsList(Collection<T> collection, Function<? super T, ? extends R> mapper) {
-        if (org.apache.commons.collections4.CollectionUtils.isEmpty(collection)) {
+        if (CollectionUtils.isEmpty(collection)) {
             return Collections.emptyList();
         }
         return collection.stream().map(mapper).collect(Collectors.toUnmodifiableList());
@@ -33,7 +33,7 @@ public class StreamUtil {
 
     @Contract(pure = true)
     public static <T, R> List<R> mapAsMutableList(Collection<T> collection, Function<? super T, ? extends R> mapper) {
-        if (org.apache.commons.collections4.CollectionUtils.isEmpty(collection)) {
+        if (CollectionUtils.isEmpty(collection)) {
             return Collections.emptyList();
         }
         return collection.stream().map(mapper).collect(Collectors.toCollection(ArrayList::new));
@@ -42,7 +42,7 @@ public class StreamUtil {
     @Unmodifiable
     @Contract(pure = true)
     public static <T, R> ImmutableList<R> mapAsImmutableList(Collection<T> collection, Function<? super T, ? extends R> mapper) {
-        if (org.apache.commons.collections4.CollectionUtils.isEmpty(collection)) {
+        if (CollectionUtils.isEmpty(collection)) {
             return ImmutableList.of();
         }
         return collection.stream().map(mapper).collect(ImmutableList.toImmutableList());
@@ -53,7 +53,7 @@ public class StreamUtil {
     public static <T, K, V> Map<K, V> toUnmodifiableMap(Collection<T> collection,
                                                         Function<? super T, ? extends K> keyMapper,
                                                         Function<? super T, ? extends V> valueMapper) {
-        if (org.apache.commons.collections4.CollectionUtils.isEmpty(collection)) {
+        if (CollectionUtils.isEmpty(collection)) {
             return Map.of();
         }
         return collection.stream().collect(Collectors.toUnmodifiableMap(keyMapper, valueMapper));
@@ -110,7 +110,7 @@ public class StreamUtil {
         var b = ofType(a, CharSequence.class).toList();
         b.forEach(System.out::println);
         printSeparateLine();
-        a.stream().collect(single()).length();
+        var _ = a.stream().collect(single()).length();
 
     }
 }
