@@ -28,7 +28,7 @@ public class TimeTest {
         System.out.println(TimeUtil.of(timestampNow));
         System.out.println(TimeUtil.of(timestampThirtyMinutesLater));
 
-        System.out.println("\n==================== java build-in time classes ====================");
+        System.out.println("\n==================== java built-in time classes ====================");
         LocalTime localTime = LocalTime.now();
         System.out.println("LocalTime.now(): " + localTime);
         LocalDate localDate = LocalDate.now();

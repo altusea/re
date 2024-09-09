@@ -1,4 +1,4 @@
-package org.example.playground;
+package org.example.playground.cache;
 
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
 import com.github.benmanes.caffeine.cache.Caffeine;

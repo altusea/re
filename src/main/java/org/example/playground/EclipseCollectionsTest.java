@@ -5,13 +5,13 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.example.util.ConsoleUtil;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class EclipseCollectionsTest {
 
     public record Person(String firstName, String lastName) {
 
-        public boolean lastNameEquals(@NotNull String name) {
+        public boolean lastNameEquals(@NonNull String name) {
             return name.equals(this.lastName);
         }
     }

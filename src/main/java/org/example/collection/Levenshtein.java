@@ -1,7 +1,7 @@
 package org.example.collection;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Objects;
 
@@ -57,7 +57,7 @@ public class Levenshtein {
     }
 
     @Contract(pure = true)
-    private static int min(int @NotNull ... a) {
+    private static int min(int @NonNull ... a) {
         int min = Integer.MAX_VALUE;
         for (int i : a) if (i < min) min = i;
         return min;

@@ -1,6 +1,6 @@
 package org.example.collection;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -57,7 +57,7 @@ class RangeExpander implements Iterator<Integer>, Iterable<Integer> {
     }
 
     @Override
-    public @NotNull Iterator<Integer> iterator() {
+    public @NonNull Iterator<Integer> iterator() {
         return this;
     }
 

@@ -1,4 +1,4 @@
-package org.example.playground;
+package org.example.playground.codec;
 
 import java.util.Arrays;
 import java.util.HexFormat;

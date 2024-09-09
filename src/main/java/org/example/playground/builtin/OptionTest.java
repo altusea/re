@@ -1,4 +1,4 @@
-package org.example.playground;
+package org.example.playground.builtin;
 
 import kala.collection.Seq;
 import kala.collection.mutable.MutableArrayList;
