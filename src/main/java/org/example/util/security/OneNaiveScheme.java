@@ -1,4 +1,4 @@
-package org.example.security;
+package org.example.util.security;
 
 import org.dromara.hutool.core.codec.binary.HexUtil;
 import org.dromara.hutool.crypto.asymmetric.KeyType;

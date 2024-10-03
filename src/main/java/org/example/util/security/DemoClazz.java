@@ -1,4 +1,4 @@
-package org.example.security;
+package org.example.util.security;
 
 public class DemoClazz extends AbstractedTimestamped {
 

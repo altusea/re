@@ -1,4 +1,4 @@
-package org.example.security;
+package org.example.playground;
 
 import org.dromara.hutool.crypto.bc.SmUtil;
 
