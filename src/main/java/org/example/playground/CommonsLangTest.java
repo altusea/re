@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.function.Consumers;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.commons.lang3.time.StopWatch;
-import org.example.util.ConsoleUtil;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class CommonsLangTest {
         stopWatch.stop();
         System.out.println(stopWatch.formatTime());
 
-        ConsoleUtil.printSeparateLine();
+        printSeparateLine();
         int[] a = new int[]{1, 2, 3};
         var i = ArrayUtils.indexOf(a, 2);
         var b = new long[10];

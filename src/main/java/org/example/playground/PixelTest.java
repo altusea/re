@@ -1,13 +1,14 @@
 package org.example.playground;
 
 import kala.collection.immutable.ImmutableSeq;
-import org.example.util.ConsoleUtil;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
+
+import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class PixelTest {
 
@@ -24,7 +25,7 @@ public class PixelTest {
                 var b64StrLen = base64.length();
                 System.out.println(b64StrLen + " " + b64StrLen % 3);
             }
-            ConsoleUtil.printSeparateLine();
+            printSeparateLine();
         });
 
         System.out.println(picturesDirPath);

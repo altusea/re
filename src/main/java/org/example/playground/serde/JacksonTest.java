@@ -4,12 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
-import org.example.util.ConsoleUtil;
 import org.example.util.JacksonObjectMapperFactory;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
+
+import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class JacksonTest {
 
@@ -27,7 +28,7 @@ public class JacksonTest {
         var d = objectMapper.readValue(b, new TypeReference<Optional<String>>() {
         });
 
-        ConsoleUtil.printSeparateLine();
+        printSeparateLine();
         var t1 = new TestRecord("t1", "t2");
         var st1 = objectMapper.writeValueAsString(t1);
         var t2 = objectMapper.readValue(st1, TestRecord.class);

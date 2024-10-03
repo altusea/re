@@ -4,8 +4,9 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.example.util.ConsoleUtil;
 import org.jspecify.annotations.NonNull;
+
+import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class EclipseCollectionsTest {
 
@@ -26,7 +27,7 @@ public class EclipseCollectionsTest {
         var lastNames2 = people.asLazy().collect(Person::lastName);
         System.out.println(lastNames2.makeString()); // "Smith, Watson, Williams"
 
-        ConsoleUtil.printSeparateLine();
+        printSeparateLine();
         var smiths1 = people.select(person -> person.lastNameEquals("Smith"));
         System.out.println(smiths1.makeString());
         var smiths2 = people.selectWith(Person::lastNameEquals, "Smith");
@@ -36,7 +37,7 @@ public class EclipseCollectionsTest {
         var notSmiths2 = people.rejectWith(Person::lastNameEquals, "Smith");
         System.out.println(notSmiths2.makeString());
 
-        ConsoleUtil.printSeparateLine();
+        printSeparateLine();
         // Any
         System.out.println(people.anySatisfy(person -> person.lastNameEquals("Smith")));
         System.out.println(people.anySatisfyWith(Person::lastNameEquals, "Smith"));
@@ -47,7 +48,7 @@ public class EclipseCollectionsTest {
         System.out.println(people.noneSatisfy(person -> person.lastNameEquals("Smith")));
         System.out.println(people.noneSatisfyWith(Person::lastNameEquals, "Smith"));
 
-        ConsoleUtil.printSeparateLine();
+        printSeparateLine();
         Pair<String, String> pair = Tuples.pair("Str", "Int");
         System.out.println(pair.getOne());
         System.out.println(pair.getTwo());

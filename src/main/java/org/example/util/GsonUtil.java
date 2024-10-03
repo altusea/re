@@ -8,6 +8,8 @@ import org.example.util.internal.gson.*;
 import java.util.List;
 import java.util.Optional;
 
+import static org.example.util.ConsoleUtil.printSeparateLine;
+
 public class GsonUtil {
 
     private static final Gson gson;
@@ -44,7 +46,7 @@ public class GsonUtil {
         System.out.println(GsonUtil.toJson(c));
         System.out.println(GsonUtil.toJson(d));
 
-        ConsoleUtil.printSeparateLine();
+        printSeparateLine();
         System.out.println(GsonUtil.fromJson("[\"a\"]", new TypeToken<Optional<String>>() {
         }));
         System.out.println(GsonUtil.fromJson("[]", new TypeToken<Optional<String>>() {

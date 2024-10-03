@@ -9,6 +9,8 @@ import org.dromara.hutool.core.data.id.Snowflake;
 
 import java.util.UUID;
 
+import static org.example.util.ConsoleUtil.printSeparateLine;
+
 public class IdGeneratorFactory {
 
     public static TimeBasedGenerator getTimeBasedGenerator() {
@@ -22,13 +24,13 @@ public class IdGeneratorFactory {
         System.out.println(uuid.toString());
         System.out.println(uuid.timestamp());
 
-        ConsoleUtil.printSeparateLine("test Snowflake:");
+        printSeparateLine("test Snowflake:");
         var snowflake = new Snowflake(IdConstants.DEFAULT_WORKER_ID, IdConstants.DEFAULT_DATACENTER_ID, true);
         System.out.println(snowflake.nextStr());
         System.out.println(snowflake.next());
         System.out.println("compare: " + snowflake.next());
         System.out.println("compare: " + Long.MAX_VALUE);
-        ConsoleUtil.printSeparateLine();
+        printSeparateLine();
         System.out.println(IdUtil.fastSimpleUUID());
         System.out.println(IdUtil.simpleUUID());
     }

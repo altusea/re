@@ -1,13 +1,13 @@
 package org.example.playground.concurrency;
 
-import org.example.util.ConsoleUtil;
-
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.StructuredTaskScope;
 import java.util.stream.Collectors;
+
+import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class PlayWithStructuredConcurrency {
 
@@ -33,7 +33,7 @@ public class PlayWithStructuredConcurrency {
             throw new RuntimeException(e);
         }
 
-        ConsoleUtil.printSeparateLine();
+        printSeparateLine();
 
         try (var scope = new StructuredTaskScope.ShutdownOnSuccess<Weather>()) {
             scope.fork(readWeatherA());
@@ -45,7 +45,7 @@ public class PlayWithStructuredConcurrency {
             throw new RuntimeException(e);
         }
 
-        ConsoleUtil.printSeparateLine();
+        printSeparateLine();
 
         try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
             scope.fork(readWeatherA());
@@ -57,7 +57,7 @@ public class PlayWithStructuredConcurrency {
             throw new RuntimeException(e);
         }
 
-        ConsoleUtil.printSeparateLine();
+        printSeparateLine();
 
         try (var scope = new StructuredTaskScope<>()) {
             List<Callable<Weather>> callables = List.of(readWeatherA(), readWeatherB(), readWeatherC());
