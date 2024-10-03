@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>re</artifactId>
-    <version>2024.9.0</version>
+    <version>2024.10.0</version>
 
     <properties>
         <maven.compiler.release>23</maven.compiler.release>
@@ -17,13 +17,13 @@
         <logback.version>1.5.8</logback.version>
         <guava.version>33.3.1-jre</guava.version>
         <gson.version>2.11.0</gson.version>
-        <jackson.version>2.18.0-rc1</jackson.version>
-        <http-components.version>5.4-beta1</http-components.version>
+        <jackson.version>2.18.0</jackson.version>
+        <http-components.version>5.4</http-components.version>
         <okhttp.version>5.0.0-alpha.14</okhttp.version>
         <jctools.version>4.0.5</jctools.version>
-        <easyexcel.version>4.0.2</easyexcel.version>
+        <easyexcel.version>4.0.3</easyexcel.version>
         <eclipse-collections.version>12.0.0.M3</eclipse-collections.version>
-        <agrona.version>1.23.0</agrona.version>
+        <agrona.version>1.23.1</agrona.version>
     </properties>
 
     <dependencyManagement>
@@ -38,7 +38,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.11.0</version>
+                <version>5.11.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -71,7 +71,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.16.1</version>
+            <version>2.17.0</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
@@ -86,6 +86,10 @@
                 <exclusion>
                     <groupId>org.apache.commons</groupId>
                     <artifactId>commons-lang3</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -147,11 +151,6 @@
             <version>${jctools.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
-            <version>3.1.8</version>
-        </dependency>
-        <dependency>
             <groupId>com.fasterxml.uuid</groupId>
             <artifactId>java-uuid-generator</artifactId>
             <version>5.1.0</version>
@@ -180,6 +179,12 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>error_prone_annotations</artifactId>
+                    <groupId>com.google.errorprone</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- jackson -->
         <dependency>
