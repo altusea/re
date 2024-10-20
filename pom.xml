@@ -11,19 +11,31 @@
     <properties>
         <maven.compiler.release>23</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hutool.version>6.0.0-M17</hutool.version>
-        <kala.version>0.74.0</kala.version>
-        <slf4j.version>2.0.13</slf4j.version>
-        <logback.version>1.5.11</logback.version>
-        <guava.version>33.3.1-jre</guava.version>
-        <gson.version>2.11.0</gson.version>
-        <jackson.version>2.18.0</jackson.version>
-        <http-components.version>5.4</http-components.version>
-        <okhttp.version>5.0.0-alpha.14</okhttp.version>
-        <jctools.version>4.0.5</jctools.version>
-        <easyexcel.version>4.0.3</easyexcel.version>
-        <eclipse-collections.version>12.0.0.M3</eclipse-collections.version>
+        <!-- libs -->
         <agrona.version>1.23.1</agrona.version>
+        <bouncycastle.version>1.78.1</bouncycastle.version>
+        <commons-codec.version>1.17.1</commons-codec.version>
+        <commons-collections4.version>4.5.0-M2</commons-collections4.version>
+        <commons-compress.version>1.27.1</commons-compress.version>
+        <commons-io.version>2.17.0</commons-io.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
+        <easyexcel.version>4.0.3</easyexcel.version>
+        <failsafe.version>3.3.2</failsafe.version>
+        <fastutil.version>8.5.15</fastutil.version>
+        <freemarker.version>2.3.33</freemarker.version>
+        <gson.version>2.11.0</gson.version>
+        <guava.version>33.3.1-jre</guava.version>
+        <http-components.version>5.4</http-components.version>
+        <hutool.version>6.0.0-M17</hutool.version>
+        <jackson.version>2.18.0</jackson.version>
+        <jctools.version>4.0.5</jctools.version>
+        <joda-money.version>2.0.0</joda-money.version>
+        <jsoup.version>1.18.1</jsoup.version>
+        <junit.version>5.11.3</junit.version>
+        <kala.version>0.74.0</kala.version>
+        <logback.version>1.5.11</logback.version>
+        <slf4j.version>2.0.13</slf4j.version>
+        <vavr.version>0.10.5</vavr.version>
     </properties>
 
     <dependencyManagement>
@@ -38,7 +50,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.11.3</version>
+                <version>${junit.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -61,27 +73,27 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.17.0</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
-            <version>4.5.0-M2</version>
+            <version>${commons-collections4.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.17.0</version>
+            <version>${commons-io.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.17.1</version>
+            <version>${commons-codec.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.27.1</version>
+            <version>${commons-compress.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.commons</groupId>
@@ -107,12 +119,12 @@
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk18on</artifactId>
-            <version>1.78.1</version>
+            <version>${bouncycastle.version}</version>
         </dependency>
         <dependency>
             <groupId>org.joda</groupId>
             <artifactId>joda-money</artifactId>
-            <version>2.0.0</version>
+            <version>${joda-money.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -127,19 +139,9 @@
         <dependency>
             <groupId>it.unimi.dsi</groupId>
             <artifactId>fastutil-core</artifactId>
-            <version>8.5.15</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.collections</groupId>
-            <artifactId>eclipse-collections-api</artifactId>
-            <version>${eclipse-collections.version}</version>
+            <version>${fastutil.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.eclipse.collections</groupId>
-            <artifactId>eclipse-collections</artifactId>
-            <version>${eclipse-collections.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.agrona</groupId>
             <artifactId>agrona</artifactId>
@@ -173,7 +175,7 @@
         <dependency>
             <groupId>dev.failsafe</groupId>
             <artifactId>failsafe</artifactId>
-            <version>3.3.2</version>
+            <version>${failsafe.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
@@ -228,19 +230,19 @@
         <dependency>
             <groupId>io.vavr</groupId>
             <artifactId>vavr</artifactId>
-            <version>0.10.5</version>
+            <version>${vavr.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.18.1</version>
+            <version>${jsoup.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>2.3.33</version>
+            <version>${freemarker.version}</version>
         </dependency>
 
         <dependency>
