@@ -3,16 +3,18 @@ package org.example.playground;
 import com.fasterxml.uuid.Generators;
 import com.fasterxml.uuid.NoArgGenerator;
 import com.fasterxml.uuid.impl.UUIDUtil;
+import com.github.f4b6a3.uuid.alt.GUID;
 import org.dromara.hutool.core.data.id.NanoId;
 import org.dromara.hutool.core.util.ByteUtil;
 
+import java.time.Duration;
 import java.util.UUID;
 
 import static org.example.util.ConsoleUtil.printSeparateLine;
 
 public class UUIDTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("generate a nanoid which is url-friendly:");
         System.out.println(NanoId.randomNanoId());
 
@@ -36,5 +38,13 @@ public class UUIDTest {
         System.out.println(v7Gen.getType() + ": " + v7);
         byte[] v7Bytes = UUIDUtil.asByteArray(v7);
         System.out.println("v7Long: " + ByteUtil.toLong(v7Bytes));
+
+        printSeparateLine();
+        var guid1 = GUID.v7();
+        System.out.println("guid1: " + guid1);
+        Thread.sleep(Duration.ofSeconds(1L));
+        var guid2 = GUID.v7();
+        System.out.println("guid2: " + guid2);
+        System.out.println(guid2.compareTo(guid1)); // should be "1"
     }
 }
